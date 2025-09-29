@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Says Game</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Simon Says</h1>
+        <p>Simon says es un juego donde el usuario debe repetir el patrón que muestra la CPU</p>
+    </header>
+    <main>
+        <section id="game-start">
+            <div id="start-buttons">
+                <button id="start-btn" class="big-btn">Start Game</button>
+                <button id="score-btn" class="mid-btn">Puntuaciones</button>
+            </div>
+        </section>
+        <section id="game-container" class="hidden">
+            <section id="game-header">
+                <h3 class="uppercase">nivel <span id="round-indicator"></span></h3>
+                <h3 class="uppercase">puntuación <span id="score-indicator"></span></h3>
+            </section>
+            <section id="board" class="">
+                <div id="1" class="color1"></div>
+                <div id="2" class="color2"></div>
+                <div id="3" class="color3"></div>
+                <div id="4" class="color4"></div>
+                <div id="5" class="color5 "></div>
+                <div id="6" class="color6 "></div>
+                <div id="7" class="color7 "></div>
+                <div id="8" class="color8 "></div>
+            </section>
+            <!-- <section id="game-footer">
+                <h3 class="uppercase" id="user-turn">user: <span id="user"></span></h3>
+                <h3 class="uppercase" id="dif-displa">dificulty: <span id="dif-index"></span></h3>
+            </section> -->
+        </section>
+    </main>
+    <script src="./game-engine.js"></script>
+</body>
+
+</html>
