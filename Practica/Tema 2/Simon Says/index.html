@@ -10,8 +10,8 @@
 
 <body>
     <header>
-        <h1>Simon Says</h1>
-        <p>Simon says es un juego donde el usuario debe repetir el patrón que muestra la CPU</p>
+        <h1 id="game-title">Simon Says</h1>
+        <p id="game-description">Simon says es un juego donde el usuario debe repetir el patrón que muestra la CPU</p>
     </header>
     <main>
         <section id="game-start">
@@ -30,15 +30,34 @@
                 <div id="2" class="color2"></div>
                 <div id="3" class="color3"></div>
                 <div id="4" class="color4"></div>
-                <div id="5" class="color5 "></div>
-                <div id="6" class="color6 "></div>
-                <div id="7" class="color7 "></div>
-                <div id="8" class="color8 "></div>
+                <div id="5" class="color5 hidden"></div>
+                <div id="6" class="color6 hidden"></div>
+                <div id="7" class="color7 hidden"></div>
+                <div id="8" class="color8 hidden"></div>
             </section>
             <!-- <section id="game-footer">
                 <h3 class="uppercase" id="user-turn">user: <span id="user"></span></h3>
                 <h3 class="uppercase" id="dif-displa">dificulty: <span id="dif-index"></span></h3>
             </section> -->
+        </section>
+        <section id="score-board" class="hidden">
+            <div>
+                <button id="score-back-btn" class="">Volver</button>
+            </div>
+            <table>
+                <thead>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Nivel</th>
+                    <th>Puntuación</th>
+                </thead>
+                <tbody id="score-data">
+
+                </tbody>
+                <tfoot>
+
+                </tfoot>
+            </table>
         </section>
     </main>
     <script src="./game-engine.js"></script>
