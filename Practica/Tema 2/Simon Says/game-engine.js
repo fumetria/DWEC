@@ -10,10 +10,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const apiUrl = 'https://68dc4aaa7cd1948060a9ef39.mockapi.io/api/v1/fuApi/scores';
 
     const start = document.getElementById("game-start");
+    const starBtn = document.getElementById("start-btn");
+    const scoreBoard = document.getElementById("score-board");
+    const scoreBtn = document.getElementById("score-btn");
+    const scoreData = document.getElementById("score-data");
     const gameContainer = document.getElementById("game-container");
     const board = document.getElementById("board");
     const roundIndex = document.getElementById("round-indicator");
     const scoreIndex = document.getElementById("score-indicator");
+    const scoreBack = document.getElementById("score-back-btn");
+    const endGameSection = document.getElementById("end-game");
+    const scoreDisplay = document.getElementById("score-display");
+    const newBtn = document.getElementById("new-btn");
+    const homeBtn = document.getElementById('home-btn');
 
     function transitionSection(hidden, show) {
         hidden.classList.add("hidden");
@@ -91,9 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
         roundIndex.innerText = level;
         let cpuInput = Math.ceil(Math.random() * boardBtns);
         cpuSequence.push(cpuInput);
-        console.log(cpuSequence);
+        // console.log(cpuSequence);
+        const endSecuence = cpuSequence.length * 1000;
         displayCpuSequence(btnAnimation, nextBtnAnimation);
-        userTurn = true;
+        setTimeout(() => {
+            userTurn = true;
+        }, endSecuence);
 
     }
     function displayCpuSequence(btnA, nextBtn) {
@@ -118,7 +130,10 @@ document.addEventListener("DOMContentLoaded", () => {
             date = getDate();
             userScore = newScore(date, userName = "TestUSer", level, score);
             createNewScore(userScore);
-            setTimeout(newGame, 2000);
+            setTimeout(() => {
+                transitionSection(gameContainer, endGameSection);
+                scoreDisplay.innerText = score;
+            }, 2000);
         } else {
             userClick.classList.add("user-selected");
             setTimeout(() => {
@@ -140,7 +155,35 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreIndex.innerText = score;
         newRound();
     }
-    start.addEventListener("click", () => {
+
+    async function showScores() {
+        const scores = await fetch(apiUrl, {
+            method: 'GET',
+            headers: { 'content-type': 'application/json' },
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+        }).catch(err => {
+            return { error: "Error al obtener datos" };
+        });
+
+        if (scores.error) {
+            scoreData.innerHTML = `
+            <tr><td colspan=4 class="error-msg">${scores.error}</td><tr>`;
+        }
+        scores.forEach((score) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+            <td>${score.date}</td>
+            <td>${score.userName}</td>
+            <td>${score.level}</td>
+            <td>${score.score}</td>
+            `;
+            scoreData.appendChild(tr);
+        })
+    }
+    starBtn.addEventListener("click", () => {
         transitionSection(start, gameContainer);
         newGame();
     })
@@ -156,6 +199,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
+    scoreBtn.addEventListener("click", () => {
+        transitionSection(start, scoreBoard);
+        showScores();
+    }
+    );
+
+    scoreBack.addEventListener("click", () => {
+        transitionSection(scoreBoard, start);
+        scoreData.innerHTML = '';
+    })
+
+    newBtn.addEventListener("click", () => {
+        transitionSection(endGameSection, gameContainer);
+        newGame();
+    })
+
+    homeBtn.addEventListener("click", () => {
+        transitionSection(endGameSection, start);
+    })
 })
 
 

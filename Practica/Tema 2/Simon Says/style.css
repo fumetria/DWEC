@@ -19,10 +19,12 @@ body {
 
 header {
   text-align: center;
+  text-wrap: wrap;
   & h1 {
     font-size: 5rem;
   }
   margin-bottom: 2rem;
+  margin-inline: 1rem;
 }
 
 .uppercase {
@@ -114,4 +116,44 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+table {
+  width: 100%;
+  margin: 2rem 1rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  border-collapse: collapse;
+  background-color: #0f0f0f;
+  box-shadow: 10px 10px 15px #ff6900;
+}
+
+thead {
+  border-bottom: 1px solid white;
+}
+
+th,
+td {
+  padding: 5px 20px;
+  text-align: center;
+}
+
+th {
+  text-transform: uppercase;
+  font-size: 2rem;
+}
+
+.error-msg {
+  font-family: monospace;
+  margin-block: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+#end-game-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
