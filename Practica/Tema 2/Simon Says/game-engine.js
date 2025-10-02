@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const scoreDisplay = document.getElementById("score-display");
     const newBtn = document.getElementById("new-btn");
     const homeBtn = document.getElementById('home-btn');
+    const correctSound = new Audio('./sounds/correct.mp3');
+    const incorrectSound = new Audio('./sounds/incorrect.mp3');
 
     function transitionSection(hidden, show) {
         hidden.classList.add("hidden");
@@ -122,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function checkUserInput(userClick) {
         let userScore = "";
         if (userSequence[userSequence.length - 1] != cpuSequence[userSequence.length - 1]) {
-            console.log("You lose!");
+            incorrectSound.play();
             userClick.classList.add("wrong-selected");
             setTimeout(() => {
                 userClick.classList.remove("wrong-selected");
@@ -135,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 scoreDisplay.innerText = score;
             }, 2000);
         } else {
+            correctSound.play();
             userClick.classList.add("user-selected");
             setTimeout(() => {
                 userClick.classList.remove("user-selected");

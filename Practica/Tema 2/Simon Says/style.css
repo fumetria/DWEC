@@ -157,3 +157,15 @@ th {
   align-items: center;
   gap: 1rem;
 }
+
+#end-msg {
+  font-size: 2rem;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+}
+
+#score-display {
+  text-align: center;
+  font-size: 2.5rem;
+}
