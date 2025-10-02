@@ -21,6 +21,12 @@
                 <button id="score-btn" class="mid-btn">Puntuaciones</button>
             </div>
         </section>
+        <section id="user-name" class="hidden">
+            <div class="name-form">
+                <input type="text" id="name" maxlength="12" placeholder="¿Quién eres?" required>
+                <button id="btn-name" class="mid-btn">Enviar</button>
+            </div>
+        </section>
         <section id="game-container" class="hidden">
             <section id="game-header">
                 <h3 class="uppercase">nivel <span id="round-indicator"></span></h3>
@@ -35,6 +41,9 @@
                 <div id="6" class="color6 hidden"></div>
                 <div id="7" class="color7 hidden"></div>
                 <div id="8" class="color8 hidden"></div>
+            </section>
+            <section id="game-footer">
+                <h3 class="uppercase" id="user-turn">user: <span id="player-name"></span></h3>
             </section>
         </section>
         <section id="end-game" class="hidden">

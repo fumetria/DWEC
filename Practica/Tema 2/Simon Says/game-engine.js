@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let score = 0;
     let boardBtns = 4;
     let date = "";
+    let USERNAME = "";
 
     const apiUrl = 'https://68dc4aaa7cd1948060a9ef39.mockapi.io/api/v1/fuApi/scores';
 
@@ -25,6 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const homeBtn = document.getElementById('home-btn');
     const correctSound = new Audio('./sounds/correct.mp3');
     const incorrectSound = new Audio('./sounds/incorrect.mp3');
+    const userNameSection = document.getElementById('user-name');
+    const userNameInput = document.getElementById('name');
+    const nameBtn = document.getElementById('btn-name');
+    const userIndex = document.getElementById('player-name');
 
     function transitionSection(hidden, show) {
         hidden.classList.add("hidden");
@@ -89,14 +94,16 @@ document.addEventListener("DOMContentLoaded", () => {
         level++;
         let btnAnimation = 700;
         let nextBtnAnimation = 1000;
-        if (level === 10) {
+        if (level === 4) {
+            //Mas velocidad en la secuencia de la CPU
             btnAnimation = 500;
             nextBtnAnimation = 800;
         }
-        if (level === 15) {
+        if (level === 6) {
+            //Mostramos 2 botones más
             showButtons("5", "6");
         }
-        if (level === 20) {
+        if (level === 8) {
             showButtons("7", "8");
         }
         roundIndex.innerText = level;
@@ -130,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 userClick.classList.remove("wrong-selected");
             }, 700);
             date = getDate();
-            userScore = newScore(date, userName = "TestUSer", level, score);
+            userScore = newScore(date, USERNAME, level, score);
             createNewScore(userScore);
             setTimeout(() => {
                 transitionSection(gameContainer, endGameSection);
@@ -149,13 +156,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
-    function newGame() {
+    function newGame(username) {
         userSequence = [];
         cpuSequence = [];
         level = 0;
         score = 0;
         roundIndex.innerText = level;
         scoreIndex.innerText = score;
+        userIndex.innerText = username;
         newRound();
     }
 
@@ -187,8 +195,13 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
     starBtn.addEventListener("click", () => {
-        transitionSection(start, gameContainer);
-        newGame();
+        transitionSection(start, userNameSection);
+    })
+
+    nameBtn.addEventListener("click", () => {
+        transitionSection(userNameSection, gameContainer);
+        USERNAME = userNameInput.value;
+        newGame(USERNAME);
     })
 
     board.addEventListener("click", (event) => {
