@@ -41,6 +41,34 @@ function createMovie(title, genre, directorName, score) {
     return newMovie;
 }
 
+function getStars(movieScore) {
+    const fillStar = '<i class="bi bi-star-fill"></i>';
+    const halfStar = '<i class="bi bi-star-half"></i>';
+    const emptyStar = '<i class="bi bi-star"></i>';
+    let fillStars = 0;
+    let halfStars = 0;
+    let emptyStars = 0;
+    if (movieScore % 2 != 0) {
+        fillStars = (movieScore - 1) / 2;
+        halfStars = 1;
+        emptyStars = 5 - (halfStars + (movieScore / 2));
+    } else {
+        fillStars = (movieScore) / 2;
+        emptyStars = 5 - (movieScore / 2);
+    }
+    let totalStars = "";
+    for (let i = 0; i < fillStars; i++) {
+        totalStars += fillStar;
+    }
+    for (let i = 0; i < halfStars; i++) {
+        totalStars += halfStar;
+    }
+    for (let i = 0; i < emptyStars; i++) {
+        totalStars += emptyStar;
+    }
+    return totalStars;
+}
+
 
 
 async function getMovies() {
@@ -58,19 +86,28 @@ async function getMovies() {
         moviesData.innerHTML = `
         <tr><td colspan=7 class="px-2 text-center">${movies.error}</td><tr>`;
     }
+    movies.map(movie => {
+        const stars = getStars(movie.score);
+        movie.score = stars;
+    });
+
     movies.forEach((movie) => {
-        const tr = document.createElement('tr');
-        tr.classList.add('even:bg-emerald-100');
-        tr.innerHTML = `
+        moviesData.innerHTML += `
+        <tr class="even:bg-emerald-100 odd:bg-emerald-50">
             <td class="px-2 text-center">${movie.id}</td>
             <td class="px-2">${movie.title}</td>
             <td class="px-2 text-center">${movie.genre}</td>
             <td class="px-2 text-center">${movie.director}</td>
-            <td class="px-2 text-center">${movie.score}</td>
+            <td class="px-2 text-center text-yellow-400">${movie.score}</td>
             <td class="px-2 text-center">${movie.createdAt}</td>
-            <td class="px-2 text-center"></td>
-            `;
-        moviesData.appendChild(tr);
+            <td class="px-2 text-center">
+            <div class="flex gap-3 justify-center px-2 py-1">
+                <div class="size-6 bg-amber-400 hover:bg-amber-200 text-white rounded"><i class="bi bi-pencil"></i></div>
+                <div class="size-6 bg-red-500 hover:bg-red-200 text-white rounded"><i class="bi bi-trash3-fill"></i></div>
+            </div>
+            </td>
+        </tr>        
+        `
     })
 }
 
