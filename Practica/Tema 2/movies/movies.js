@@ -4,7 +4,25 @@ let [title, genre, director, score] = document.querySelectorAll('input');
 const formBtn = document.getElementById('form-btn');
 const moviesData = document.getElementById('movies-data');
 const refreshBtn = document.getElementById('refresh-btn');
+const mockBtn = document.getElementById('mock-btn');
 
+async function insertaMockData() {
+    const mockMovies = await fetch('./movies.json')
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+        })
+        .catch(error => {
+            console.log('Error al cargar el JSON');
+        })
+    mockMovies.forEach(movie => {
+        let movieGenre = movie.genre.join(', ');
+        movie.genre = movieGenre;
+        const newMovie = createMovie(movie.title, movie.year, movie.director, movie.poster, movie.genre, movie.rate);
+        submitMovie(newMovie);
+    })
+}
 function getDate() {
     const date = Date.now();
     const today = new Date(date);
@@ -27,15 +45,17 @@ function getDate() {
     return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
-function createMovie(title, genre, directorName, score) {
+function createMovie(title, year, directorName, poster, genre, rate) {
 
     let date = getDate();
     const newMovie = {
         createdAt: date,
         title: title,
-        genre: genre,
+        year: year,
         director: directorName,
-        score: score
+        poster: poster,
+        genre: genre,
+        rate: rate
     };
 
     return newMovie;
@@ -87,18 +107,21 @@ async function getMovies() {
         <tr><td colspan=7 class="px-2 text-center">${movies.error}</td><tr>`;
     }
     movies.map(movie => {
-        const stars = getStars(movie.score);
-        movie.score = stars;
+        const stars = getStars(movie.rate);
+        movie.rate = stars;
     });
 
     movies.forEach((movie) => {
         moviesData.innerHTML += `
         <tr class="even:bg-emerald-100 odd:bg-emerald-50">
+        
             <td class="px-2 text-center">${movie.id}</td>
+            <td class="px-2 text-center"><img src="${movie.poster}" class="w-32 h-48 object-cover"></td>
             <td class="px-2">${movie.title}</td>
+            <td class="px-2 text-center">${movie.year}</td>
             <td class="px-2 text-center">${movie.genre}</td>
             <td class="px-2 text-center">${movie.director}</td>
-            <td class="px-2 text-center text-yellow-400">${movie.score}</td>
+            <td class="px-2 text-center text-yellow-400">${movie.rate}</td>
             <td class="px-2 text-center">${movie.createdAt}</td>
             <td class="px-2 text-center">
             <div class="flex gap-3 justify-center px-2 py-1">
@@ -142,5 +165,9 @@ refreshBtn.addEventListener('click', () => {
 
 })
 
+mockBtn.addEventListener('click', () => {
+    insertaMockData();
+    getMovies();
+})
 
 
