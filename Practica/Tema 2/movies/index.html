@@ -14,7 +14,7 @@
         <h1 class="uppercase text-6xl font-mono">movies</h1>
     </header>
     <main class="flex flex-col content-center items-center gap-6">
-        <section class="flex flex-col justify-center max-w-150">
+        <section class="flex flex-col justify-center w-70 lg:w-lg ">
             <form action="#" class="border px-4 py-2 my-4 rounded">
                 <div class="flex flex-col mx-2 my-3">
                     <label for="title">Título</label>
@@ -29,6 +29,10 @@
                     <input type="text" id="director" class="border max-w-120 rounded">
                 </div>
                 <div class="flex flex-col mx-2 my-3">
+                    <label for="poster">Poster</label>
+                    <input type="text" id="poster" class="border max-w-120 rounded">
+                </div>
+                <div class="flex flex-col mx-2 my-3">
                     <label for="genre">Género</label>
                     <input type="text" id="genre" class="border max-w-120 rounded">
                 </div>
@@ -37,19 +41,26 @@
                     <input type="number" id="rate" class="border max-w-120 rounded" max="10" min="
                 0" step="1">
                 </div>
+                <div class="flex flex-col mx-2 my-3">
+                    <input type="text" id="id" class="border max-w-120 rounded hidden" max="10" min="
+                0" step="1">
+                </div>
                 <div class="flex justify-center">
                     <button type="submit" id="form-btn"
                         class="py-1 px-3 text-white rounded bg-orange-500">Añadir</button>
+                    <button type="submit" id="form-update-btn" class="py-1 px-3 text-white rounded bg-sky-500 hidden">
+                        Actualizar
+                    </button>
                 </div>
             </form>
         </section>
         <section>
             <div class="my-3">
                 <button class="py-1 px-3 text-white rounded bg-orange-500" id="refresh-btn">Actualizar</button>
-                <button class="py-1 px-3 text-white rounded bg-blue-500" id="mock-btn">Poblar</button>
+                <button class="py-1 px-3 text-white rounded bg-sky-500" id="mock-btn">Poblar</button>
             </div>
             <table class="border-collapse">
-                <caption class="bg-emerald-700 text-white ">Listado peliculas</caption>
+                <caption class="bg-emerald-700 text-white font-bold">Listado peliculas</caption>
                 <thead class="bg-emerald-500 text-white ">
                     <th class="px-2 py-2">ID</th>
                     <th class="px-2 py-2">PORTADA</th>

@@ -1,12 +1,44 @@
 const apiURL = 'https://68dc4aaa7cd1948060a9ef39.mockapi.io/api/v1/fuApi/movies';
 
-let [title, genre, director, score] = document.querySelectorAll('input');
+let [title, year, director, poster, genre, rate, id] = document.querySelectorAll('input');
 const formBtn = document.getElementById('form-btn');
 const moviesData = document.getElementById('movies-data');
 const refreshBtn = document.getElementById('refresh-btn');
 const mockBtn = document.getElementById('mock-btn');
+const formUpdateBtn = document.getElementById('form-update-btn');
 
-async function insertaMockData() {
+
+function buttonHidden(hidden, show) {
+    hidden.classList.add("hidden");
+    show.classList.remove("hidden");
+}
+/**
+ * Mostrar atributos de película seleccionada en el form de editar película
+ * @param {*} movieId 
+ */
+async function updateForm(movieId) {
+    const movie = await fetch(apiURL + `/${movieId}`, {
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+    }).then(res => {
+        if (res.ok) {
+            return res.json();
+        }
+    }).catch(err => {
+        return { error: "Error al obtener datos" };
+    });
+    title.value = movie.title;
+    year.value = movie.year;
+    director.value = movie.director;
+    poster.value = movie.poster;
+    genre.value = movie.genre;
+    rate.value = movie.rate;
+    id.value = movie.id;
+    buttonHidden(formBtn, formUpdateBtn);
+
+}
+
+async function insertMockData() {
     const mockMovies = await fetch('./movies.json')
         .then(res => {
             if (res.ok) {
@@ -15,12 +47,54 @@ async function insertaMockData() {
         })
         .catch(error => {
             console.log('Error al cargar el JSON');
-        })
-    mockMovies.forEach(movie => {
+        });
+
+    for (let i = 0; i < mockMovies.length; i++) {
+        const movie = mockMovies[i];
         let movieGenre = movie.genre.join(', ');
         movie.genre = movieGenre;
         const newMovie = createMovie(movie.title, movie.year, movie.director, movie.poster, movie.genre, movie.rate);
-        submitMovie(newMovie);
+        await submitMovie(newMovie);
+
+    }
+}
+
+async function updateMovie(movieTitle, movieYear, directorName, moviePoster, movieGenre, movieRate, movieId) {
+    const movie = createMovie(movieTitle, movieYear, directorName, moviePoster, movieGenre, movieRate);
+    const result = await fetch(apiURL + `/${movieId}`, {
+        method: 'PUT',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(movie)
+    }).then(res => {
+        if (res.ok) {
+            title.value = "";
+            year.value = "";
+            director.value = "";
+            poster.value = "";
+            genre.value = "";
+            rate.value = "";
+            id.value = "";
+            buttonHidden(formUpdateBtn, formBtn);
+            return res.json();
+        }
+    }).then((res) => {
+        moviesData.innerHTML = "";
+        getMovies();
+    }).catch(error => {
+        console.log('Algo salió mal');
+    })
+}
+
+async function deleteMovie(movieId) {
+    await fetch(apiURL + `/${movieId}`, {
+        method: 'DELETE',
+    }).then(async res => {
+        if (res.ok) {
+            moviesData.innerHTML = "";
+            await getMovies();
+        }
+    }).catch(err => {
+        console.log('Algo salió mal al eliminar movie...')
     })
 }
 function getDate() {
@@ -114,24 +188,25 @@ async function getMovies() {
     movies.forEach((movie) => {
         moviesData.innerHTML += `
         <tr class="even:bg-emerald-100 odd:bg-emerald-50">
-        
-            <td class="px-2 text-center">${movie.id}</td>
-            <td class="px-2 text-center"><img src="${movie.poster}" class="w-32 h-48 object-cover"></td>
-            <td class="px-2">${movie.title}</td>
-            <td class="px-2 text-center">${movie.year}</td>
-            <td class="px-2 text-center">${movie.genre}</td>
-            <td class="px-2 text-center">${movie.director}</td>
-            <td class="px-2 text-center text-yellow-400">${movie.rate}</td>
-            <td class="px-2 text-center">${movie.createdAt}</td>
-            <td class="px-2 text-center">
-            <div class="flex gap-3 justify-center px-2 py-1">
-                <div class="size-6 bg-amber-400 hover:bg-amber-200 text-white rounded"><i class="bi bi-pencil"></i></div>
-                <div class="size-6 bg-red-500 hover:bg-red-200 text-white rounded"><i class="bi bi-trash3-fill"></i></div>
+            <td class="px-2 py-1 text-center">${movie.id}</td>
+            <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-32 h-48 object-cover"></td>
+            <td class="px-2 py-1">${movie.title}</td>
+            <td class="px-2 py-1 text-center">${movie.year}</td>
+            <td class="px-2 py-1 text-center">${movie.genre}</td>
+            <td class="px-2 py-1 text-center">${movie.director}</td>
+            <td class="px-2 py-1text-center text-yellow-400">${movie.rate}</td>
+            <td class="px-2 py-1 text-center">${movie.createdAt}</td>
+            <td class="px-2 py-1 text-center">
+            <div class="flex gap-3 justify-center text-lg px-2 py-1">
+                <div class="flex items-center justify-center size-8 text-xl bg-amber-400 hover:bg-amber-200 text-white rounded" 
+                    onclick="updateForm(${movie.id})"><i class="bi bi-pencil"></i></div>
+                <div class="flex items-center justify-center size-8 text-xl bg-red-500 hover:bg-red-200 text-white rounded" 
+                onclick="deleteMovie(${movie.id})"><i class="bi bi-trash3-fill"></i></div>
             </div>
             </td>
         </tr>        
         `
-    })
+    });
 }
 
 function fillTable(moviesArr) {
@@ -140,16 +215,16 @@ function fillTable(moviesArr) {
 
 }
 async function submitMovie(movie) {
-    fetch(apiURL, {
+    await fetch(apiURL, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(movie)
     }).then(res => {
         if (res.ok) {
-            alert('Película añadida correctamente');
+            return;
         }
     }).catch(e => {
-        alert('Algo salió mal');
+        console.log('Algo salió mal');
     })
 }
 
@@ -159,15 +234,22 @@ formBtn.addEventListener('click', (event) => {
     submitMovie(newMovie);
 });
 
-refreshBtn.addEventListener('click', () => {
+refreshBtn.addEventListener('click', async () => {
     moviesData.innerHTML = "";
-    getMovies();
-
+    await getMovies();
 })
 
-mockBtn.addEventListener('click', () => {
-    insertaMockData();
-    getMovies();
+mockBtn.addEventListener('click', async () => {
+    await insertMockData().then(async () => {
+        moviesData.innerHTML = "";
+        await getMovies();
+    })
 })
+
+formUpdateBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    await updateMovie(title.value, year.value, director.value, poster.value, genre.value, rate.value, id.value);
+})
+
 
 
