@@ -8,6 +8,7 @@ const mockBtn = document.getElementById('mock-btn');
 const formUpdateBtn = document.getElementById('form-update-btn');
 const loadingMockDataAnimation = document.getElementById('poblar-spin');
 const refreshDataAnimation = document.getElementById('update-spin');
+const cardListData = document.getElementById('card-list');
 
 
 function buttonHidden(hidden, show) {
@@ -214,6 +215,8 @@ async function getMovies() {
 
 }
 
+
+
 function fillTable(moviesArr) {
 
     const movies = moviesArr;
@@ -266,5 +269,19 @@ formUpdateBtn.addEventListener('click', async (event) => {
     await updateMovie(title.value, year.value, director.value, poster.value, genre.value, rate.value, id.value);
 })
 
+async function getMoviesCard() {
+    const movie = await fetch(apiURL + '/1', {
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+    }).then(res => {
+        if (res.ok) {
+            return res.json();
+        }
+    }).catch(err => {
+        return { error: "Error al obtener datos" };
+    });
+
+
+}
 
 
