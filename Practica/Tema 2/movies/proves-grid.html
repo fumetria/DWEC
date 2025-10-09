@@ -68,7 +68,7 @@
         </svg>
         <h1 class="uppercase text-white text-6xl font-mono">películas</h1>
     </header>
-    <main class="grid grid-cols-5 w-full gap-3 py-3">
+    <main class="grid grid-cols-5 w-full gap-2 py-3">
         <section class="col-span-1 bg-stone-100 mx-2 rounded">
             <form action="#" class="px-4 py-2 my-4 rounded">
                 <div class="flex flex-col mx-2 my-3">
@@ -120,8 +120,8 @@
                 </div>
             </form>
         </section>
-        <section class="col-span-4 w-full bg-stone-100 px-2 py-3 rounded">
-            <section id="list-upper-btns" class="flex justify-between mb-2">
+        <section class="col-span-4 w-full bg-stone-100 mx-1 rounded">
+            <section id="list-upper-btns" class="flex justify-between px-2 py-3 mb-2">
                 <div class=" flex gap-3">
                     <button class="py-1 px-3 flex gap-1 items-center justify-center text-white rounded bg-orange-500"
                         id="refresh-btn">
@@ -168,11 +168,12 @@
                             </svg></span>
                     </button>
                 </div>
-                <div class="flex flex-row justify-center items-center bg-stone-300 rounded" data-list-type="list">
-                    <div class="p-2" id="card-list-btn" onclick="">
+                <div id="data-type-switcher" class="flex flex-row justify-center items-center bg-stone-300 rounded"
+                    data-list-type="list">
+                    <div class="p-2 rounded" id="card-list-btn" onclick="showDataStyle('card')">
                         <button class="text-stone-100"><i class="bi bi-microsoft"></i></button>
                     </div>
-                    <div class="p-2 bg-emerald-500 rounded" id="movie-list-btn" onclick="">
+                    <div class="p-2 rounded bg-emerald-500" id="movie-list-btn" onclick="showDataStyle('list')">
                         <button class="text-stone-100" id=""><i class="bi bi-list-task"></i></button>
                     </div>
                 </div>
@@ -193,6 +194,9 @@
                     </thead>
                     <tbody class="" id="movies-data"></tbody>
                 </table>
+            </div>
+            <div id="card-data" class="h-screen grid grid-cols-5 gap-10 hidden ">
+
             </div>
         </section>
     </main>
