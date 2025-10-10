@@ -220,7 +220,7 @@ async function getMovies() {
         moviesData.innerHTML += `
         <tr class="even:bg-emerald-100 odd:bg-emerald-50" data-movie-id="${movie.id}">
             <td class="px-2 py-1 text-center">${movie.id}</td>
-            <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-32 h-48 object-cover"></td>
+            <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-30 h-46 object-cover"></td>
             <td class="px-2 py-1 text-wrap">${movie.title}</td>
             <td class="px-2 py-1 text-center">${movie.year}</td>
             <td class="px-2 py-1 text-center text-wrap">${movie.genre}</td>
@@ -252,7 +252,7 @@ function fillData(moviesArr, dataStyle) {
             moviesData.innerHTML += `
         <tr class="even:bg-emerald-100 odd:bg-emerald-50" data-movie-id="${movie.id}">
             <td class="px-2 py-1 text-center">${movie.id}</td>
-            <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-32 h-48 object-cover"></td>
+            <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-30 h-46 object-cover"></td>
             <td class="px-2 py-1 text-wrap">${movie.title}</td>
             <td class="px-2 py-1 text-center">${movie.year}</td>
             <td class="px-2 py-1 text-center text-wrap">${movie.genre}</td>

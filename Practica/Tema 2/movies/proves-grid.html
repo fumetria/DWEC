@@ -10,63 +10,74 @@
 </head>
 
 <body class="flex flex-col justify-between content-center items-center h-screen bg-stone-300">
-    <header class="flex gap-2 py-2 px-3 justify-start w-full bg-emerald-500 ">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="60">
-            <defs>
-                <style>
-                    .cls-2 {
-                        fill: #32314b
-                    }
+    <header class="flex gap-2 py-2 px-3 justify-between w-full bg-emerald-500 ">
+        <div class="flex gap-2 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="60">
+                <defs>
+                    <style>
+                        .cls-2 {
+                            fill: #32314b
+                        }
 
-                    .cls-3 {
-                        fill: #27273d
-                    }
+                        .cls-3 {
+                            fill: #27273d
+                        }
 
-                    .cls-4 {
-                        fill: #3e436d
-                    }
+                        .cls-4 {
+                            fill: #3e436d
+                        }
 
-                    .cls-5 {
-                        fill: #fff
-                    }
+                        .cls-5 {
+                            fill: #fff
+                        }
 
-                    .cls-6 {
-                        fill: #ddd
-                    }
-                </style>
-            </defs>
-            <circle cx="256" cy="256" r="256" style="fill:#5ee9b5" id="BULINE" class="bg-emerald-300" />
-            <g id="Icons">
-                <path class="cls-2" d="M69.17 191.1h375v216.15a17 17 0 0 1-17 17h-341a17 17 0 0 1-17-17V191.1z" />
-                <path class="cls-3"
-                    d="M444.17 191.1v44H126.41A27.91 27.91 0 0 0 98.5 263v161.27H86.18a17 17 0 0 1-17-17V191.1z" />
-                <circle class="cls-4" cx="421.91" cy="349.91" r="10.4" />
-                <circle class="cls-4" cx="421.91" cy="328.25" r="7.37" />
-                <rect class="cls-4" x="69.17" y="165.06" width="375" height="52.5" rx="4.85" />
-                <path class="cls-2"
-                    d="M444.17 207.06v5.65a4.85 4.85 0 0 1-4.85 4.85H74a4.85 4.85 0 0 1-4.86-4.85v-42.8a4.85 4.85 0 0 1 4.86-4.85h6.14v37.15a4.85 4.85 0 0 0 4.86 4.85z" />
-                <path class="cls-5"
-                    d="M145.06 216.56h-37.07l27.8-51.5h37.07l-27.8 51.5zM222.56 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5zM300.06 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5zM377.56 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5z" />
-                <path class="cls-6"
-                    d="m228.11 207.06-5.56 10.5h-37.06l5.56-10.5h37.06zM305.61 207.06l-5.56 10.5h-37.06l5.56-10.5h37.06zM383.11 207.06l-5.56 10.5h-37.06l5.56-10.5h37.06z" />
-                <rect class="cls-4" x="69.17" y="67.64" width="375" height="52.5" rx="4.85"
-                    transform="rotate(-13.37 256.601 93.863)" />
-                <path class="cls-2"
-                    d="m442.74 65.87 1.3 5.5a4.85 4.85 0 0 1-3.59 5.84l-355.4 84.44a4.85 4.85 0 0 1-5.85-3.6l-9.89-41.64a4.85 4.85 0 0 1 3.6-5.84l6-1.42 8.58 36.15a4.86 4.86 0 0 0 5.85 3.59z" />
-                <path class="cls-5"
-                    d="m154.15 145.23-36.07 8.57L133 96.3l36.06-8.57-14.91 57.5zM229.55 127.32l-36.06 8.57 14.91-57.51 36.06-8.57-14.91 57.51zM304.95 109.4l-36.06 8.57 14.91-57.5 36.06-8.57-14.91 57.5zM380.35 91.49l-36.06 8.57 14.91-57.51 36.06-8.57-14.91 57.51z" />
-                <path class="cls-6"
-                    d="m157.13 133.73-2.98 11.5-36.06 8.57 2.98-11.5 36.06-8.57zM232.53 115.82l-2.98 11.5-36.06 8.56 2.98-11.5 36.06-8.56zM307.93 97.9l-2.98 11.5-36.06 8.57 2.98-11.5 36.06-8.57zM383.33 79.99l-2.98 11.5-36.06 8.57 2.98-11.51 36.06-8.56z" />
-                <path class="cls-3"
-                    d="M166.87 217.56H89.55A9.56 9.56 0 0 1 80 208v-78.55A11.48 11.48 0 0 1 91.46 118h33.76a11.48 11.48 0 0 1 9.63 5.22l46.43 71.33a16 16 0 0 1-14.41 23.01z" />
-                <circle class="cls-5" cx="97.99" cy="198.43" r="7.33" />
-                <circle class="cls-5" cx="97.99" cy="136.43" r="7.33" />
-                <circle class="cls-5" cx="161.73" cy="198.43" r="7.33" />
-                <path class="cls-5"
-                    d="M416.74 316.43a5.17 5.17 0 1 0 0-10.33h-71.08v-50.66h71.08a5.17 5.17 0 1 0 0-10.33H96.41a5.17 5.17 0 1 0 0 10.33h71.28v50.66H96.41a5.17 5.17 0 1 0 0 10.33h155v51.5h-155a5.17 5.17 0 1 0 0 10.33h155v33.42a5.09 5.09 0 0 0 5.09 5.09h.16a5.08 5.08 0 0 0 5.08-5.09v-33.42h155a5.17 5.17 0 1 0 0-10.33h-155v-51.5zm-81.42-10.33h-73.58v-50.66h73.58zm-157.32 0v-50.66h73.38v50.66z" />
-            </g>
-        </svg>
-        <h1 class="uppercase text-white text-6xl font-mono">películas</h1>
+                        .cls-6 {
+                            fill: #ddd
+                        }
+                    </style>
+                </defs>
+                <circle cx="256" cy="256" r="256" style="fill:#5ee9b5" id="BULINE" class="bg-emerald-300" />
+                <g id="Icons">
+                    <path class="cls-2" d="M69.17 191.1h375v216.15a17 17 0 0 1-17 17h-341a17 17 0 0 1-17-17V191.1z" />
+                    <path class="cls-3"
+                        d="M444.17 191.1v44H126.41A27.91 27.91 0 0 0 98.5 263v161.27H86.18a17 17 0 0 1-17-17V191.1z" />
+                    <circle class="cls-4" cx="421.91" cy="349.91" r="10.4" />
+                    <circle class="cls-4" cx="421.91" cy="328.25" r="7.37" />
+                    <rect class="cls-4" x="69.17" y="165.06" width="375" height="52.5" rx="4.85" />
+                    <path class="cls-2"
+                        d="M444.17 207.06v5.65a4.85 4.85 0 0 1-4.85 4.85H74a4.85 4.85 0 0 1-4.86-4.85v-42.8a4.85 4.85 0 0 1 4.86-4.85h6.14v37.15a4.85 4.85 0 0 0 4.86 4.85z" />
+                    <path class="cls-5"
+                        d="M145.06 216.56h-37.07l27.8-51.5h37.07l-27.8 51.5zM222.56 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5zM300.06 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5zM377.56 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5z" />
+                    <path class="cls-6"
+                        d="m228.11 207.06-5.56 10.5h-37.06l5.56-10.5h37.06zM305.61 207.06l-5.56 10.5h-37.06l5.56-10.5h37.06zM383.11 207.06l-5.56 10.5h-37.06l5.56-10.5h37.06z" />
+                    <rect class="cls-4" x="69.17" y="67.64" width="375" height="52.5" rx="4.85"
+                        transform="rotate(-13.37 256.601 93.863)" />
+                    <path class="cls-2"
+                        d="m442.74 65.87 1.3 5.5a4.85 4.85 0 0 1-3.59 5.84l-355.4 84.44a4.85 4.85 0 0 1-5.85-3.6l-9.89-41.64a4.85 4.85 0 0 1 3.6-5.84l6-1.42 8.58 36.15a4.86 4.86 0 0 0 5.85 3.59z" />
+                    <path class="cls-5"
+                        d="m154.15 145.23-36.07 8.57L133 96.3l36.06-8.57-14.91 57.5zM229.55 127.32l-36.06 8.57 14.91-57.51 36.06-8.57-14.91 57.51zM304.95 109.4l-36.06 8.57 14.91-57.5 36.06-8.57-14.91 57.5zM380.35 91.49l-36.06 8.57 14.91-57.51 36.06-8.57-14.91 57.51z" />
+                    <path class="cls-6"
+                        d="m157.13 133.73-2.98 11.5-36.06 8.57 2.98-11.5 36.06-8.57zM232.53 115.82l-2.98 11.5-36.06 8.56 2.98-11.5 36.06-8.56zM307.93 97.9l-2.98 11.5-36.06 8.57 2.98-11.5 36.06-8.57zM383.33 79.99l-2.98 11.5-36.06 8.57 2.98-11.51 36.06-8.56z" />
+                    <path class="cls-3"
+                        d="M166.87 217.56H89.55A9.56 9.56 0 0 1 80 208v-78.55A11.48 11.48 0 0 1 91.46 118h33.76a11.48 11.48 0 0 1 9.63 5.22l46.43 71.33a16 16 0 0 1-14.41 23.01z" />
+                    <circle class="cls-5" cx="97.99" cy="198.43" r="7.33" />
+                    <circle class="cls-5" cx="97.99" cy="136.43" r="7.33" />
+                    <circle class="cls-5" cx="161.73" cy="198.43" r="7.33" />
+                    <path class="cls-5"
+                        d="M416.74 316.43a5.17 5.17 0 1 0 0-10.33h-71.08v-50.66h71.08a5.17 5.17 0 1 0 0-10.33H96.41a5.17 5.17 0 1 0 0 10.33h71.28v50.66H96.41a5.17 5.17 0 1 0 0 10.33h155v51.5h-155a5.17 5.17 0 1 0 0 10.33h155v33.42a5.09 5.09 0 0 0 5.09 5.09h.16a5.08 5.08 0 0 0 5.08-5.09v-33.42h155a5.17 5.17 0 1 0 0-10.33h-155v-51.5zm-81.42-10.33h-73.58v-50.66h73.58zm-157.32 0v-50.66h73.38v50.66z" />
+                </g>
+            </svg>
+            <h1 class="uppercase text-white text-6xl font-mono">películas</h1>
+        </div>
+        <div class="flex items-center justify-center">
+            <nav class="">
+                <ul class="flex gap-2">
+                    <li class="capitalize text-stone-100"><a href="#">inicio</a></li>
+                    <li class="capitalize text-stone-100 border-b-2 border-orange-500"><a href="#">películas</a></li>
+                    <li class="capitalize text-stone-100"><a href="#">contacto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main class="grid grid-cols-5 w-full gap-2 py-3">
         <section class="col-span-1 bg-stone-100 mx-2 rounded">
@@ -74,37 +85,45 @@
                 <div class="flex flex-col mx-2 my-3">
                     <label for="title">Título</label>
                     <input type="text" id="title"
-                        class="border max-w-120 h-10 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 active:border-orange-500"
+                        class="border max-w-120 h-10 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 focus:border-2 active:border-orange-500"
                         placeholder="ej: La historia interminable">
                 </div>
-                <div class="flex flex-col mx-2 my-3">
-                    <label for="year">Año</label>
-                    <input type="number" id="year"
-                        class="border max-w-120 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 active:border-orange-500"
-                        placeholder="ej: 2020">
+                <div class="flex flex-row justify-between">
+                    <div class="flex flex-col mx-2 my-3">
+                        <label for="year">Año</label>
+                        <input type="number" id="year"
+                            class="border w-20 h-10 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 focus:border-2 active:border-orange-500"
+                            placeholder="ej: 2020" min="0" max="9999">
+                    </div>
+                    <div class="flex flex-col mx-2 my-3">
+                        <label for="duration">Duración</label>
+                        <input type="number" id="duration"
+                            class="border w-20 h-10 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 focus:border-2 active:border-orange-500"
+                            placeholder="ej: 120" max="999" min="0" disabled>
+                    </div>
                 </div>
                 <div class="flex flex-col mx-2 my-3">
                     <label for="director">Director</label>
                     <input type="text" id="director"
-                        class="border max-w-120 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 active:border-orange-500"
+                        class="border max-w-120 h-10 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 focus:border-2 active:border-orange-500"
                         placeholder="ej: Guillermo del Toro">
                 </div>
                 <div class="flex flex-col mx-2 my-3">
                     <label for="poster">Poster</label>
                     <input type="text" id="poster"
-                        class="border max-w-120 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 active:border-orange-500"
+                        class="border max-w-120 h-10 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 focus:border-2 active:border-orange-500"
                         placeholder="http://...">
                 </div>
                 <div class="flex flex-col mx-2 my-3">
                     <label for="genre">Género</label>
                     <input type="text" id="genre"
-                        class="border max-w-120 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 active:border-orange-500"
+                        class="border max-w-120 h-10 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 focus:border-2 active:border-orange-500"
                         placeholder="ej: Acción, Romance...">
                 </div>
                 <div class="flex flex-col mx-2 my-3">
                     <label for="rate">Puntuación</label>
                     <input type="number" id="rate"
-                        class="border max-w-120 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 active:border-orange-500 "
+                        class="border max-w-120 h-10 rounded border-emerald-500 hover:border-emerald-600 focus:outline-none focus:border-orange-500 focus:border-2 active:border-orange-500"
                         max="10" min="0" step="1" placeholder="5">
                 </div>
                 <div class="flex flex-col mx-2 my-3">
@@ -113,14 +132,14 @@
                 </div>
                 <div class="flex justify-center">
                     <button type="submit" id="form-btn"
-                        class="py-1 px-3 text-white rounded bg-orange-500">Añadir</button>
+                        class="py-1 px-3 font-semibold text-white rounded bg-emerald-500 hover:bg-emerald-300 hover:ring ring-emerald-500 hover:text-emerald-500 active:text-emerald-500">Añadir</button>
                     <button type="submit" id="form-update-btn" class="py-1 px-3 text-white rounded bg-sky-500 hidden">
                         Actualizar
                     </button>
                 </div>
             </form>
         </section>
-        <section class="col-span-4 w-full bg-stone-100 mx-1 rounded">
+        <section class="col-span-4 w-full h-full bg-stone-100 mx-1 rounded">
             <section id="list-upper-btns" class="flex justify-between px-2 py-3 mb-2">
                 <div class=" flex gap-3">
                     <button class="py-1 px-3 flex gap-1 items-center justify-center text-white rounded bg-orange-500"
@@ -178,7 +197,7 @@
                     </div>
                 </div>
             </section>
-            <div id="list-data" class="">
+            <div id="list-data" class="overflow-y-scroll">
                 <table class="border-collapse table-auto w-full overflow-y-scroll ">
                     <caption class="bg-emerald-700 text-white font-bold">Listado peliculas</caption>
                     <thead class="bg-emerald-500 text-white">
@@ -195,7 +214,7 @@
                     <tbody class="" id="movies-data"></tbody>
                 </table>
             </div>
-            <div id="card-data" class="h-screen grid grid-cols-5 gap-10 hidden ">
+            <div id="card-data" class="h-screen grid grid-cols-5 gap-10 hidden overflow-y-scroll px-2 py-2 ">
 
             </div>
         </section>
