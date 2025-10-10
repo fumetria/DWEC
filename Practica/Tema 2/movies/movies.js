@@ -1,6 +1,8 @@
 const apiURL = 'https://68dc4aaa7cd1948060a9ef39.mockapi.io/api/v1/fuApi/movies';
 
 let [title, year, director, poster, genre, rate, id] = document.querySelectorAll('input');
+let MOVIES;
+
 const formBtn = document.getElementById('form-btn');
 const moviesData = document.getElementById('movies-data');
 const refreshBtn = document.getElementById('refresh-btn');
@@ -15,9 +17,55 @@ const dataListBtn = document.getElementById('movie-list-btn');
 const listDataSection = document.getElementById('list-data');
 const cardDataSection = document.getElementById('card-data');
 
+function getDate() {
+    const date = Date.now();
+    const today = new Date(date);
 
+    let day = today.getDate().toString();
+    if (day.length < 2) {
+        day = "0" + day;
+    }
+    let month = (today.getMonth() + 1).toString();
+    if (month.length < 2) {
+        month = "0" + month;
+    }
+    let year = today.getFullYear();
+    let hours = today.getHours();
+    let minutes = today.getMinutes().toString();
+    if (minutes.length < 2) {
+        minutes = "0" + minutes;
+    }
 
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+}
 
+function getStars(movieRate) {
+    const fillStar = '<i class="bi bi-star-fill"></i>';
+    const halfStar = '<i class="bi bi-star-half"></i>';
+    const emptyStar = '<i class="bi bi-star"></i>';
+    let fillStars = 0;
+    let halfStars = 0;
+    let emptyStars = 0;
+    if (movieRate % 2 != 0) {
+        fillStars = (movieRate - 1) / 2;
+        halfStars = 1;
+        emptyStars = 5 - (halfStars + (movieRate / 2));
+    } else {
+        fillStars = (movieRate) / 2;
+        emptyStars = 5 - (movieRate / 2);
+    }
+    let totalStars = "";
+    for (let i = 0; i < fillStars; i++) {
+        totalStars += fillStar;
+    }
+    for (let i = 0; i < halfStars; i++) {
+        totalStars += halfStar;
+    }
+    for (let i = 0; i < emptyStars; i++) {
+        totalStars += emptyStar;
+    }
+    return totalStars;
+}
 
 function sectionSwitcher(hidden, show) {
     hidden.classList.add("hidden");
@@ -28,6 +76,7 @@ function buttonHidden(hidden, show) {
     hidden.classList.add("hidden");
     show.classList.remove("hidden");
 }
+
 /**
  * Mostrar atributos de película seleccionada en el form de editar película
  * @param {*} movieId 
@@ -115,28 +164,6 @@ async function deleteMovie(movieId) {
     })
 }
 
-function getDate() {
-    const date = Date.now();
-    const today = new Date(date);
-
-    let day = today.getDate().toString();
-    if (day.length < 2) {
-        day = "0" + day;
-    }
-    let month = (today.getMonth() + 1).toString();
-    if (month.length < 2) {
-        month = "0" + month;
-    }
-    let year = today.getFullYear();
-    let hours = today.getHours();
-    let minutes = today.getMinutes().toString();
-    if (minutes.length < 2) {
-        minutes = "0" + minutes;
-    }
-
-    return `${day}/${month}/${year} ${hours}:${minutes}`;
-}
-
 function createMovie(title, year, directorName, poster, genre, rate) {
 
     let date = getDate();
@@ -153,216 +180,6 @@ function createMovie(title, year, directorName, poster, genre, rate) {
     return newMovie;
 }
 
-function getStars(movieRate) {
-    const fillStar = '<i class="bi bi-star-fill"></i>';
-    const halfStar = '<i class="bi bi-star-half"></i>';
-    const emptyStar = '<i class="bi bi-star"></i>';
-    let fillStars = 0;
-    let halfStars = 0;
-    let emptyStars = 0;
-    if (movieRate % 2 != 0) {
-        fillStars = (movieRate - 1) / 2;
-        halfStars = 1;
-        emptyStars = 5 - (halfStars + (movieRate / 2));
-    } else {
-        fillStars = (movieRate) / 2;
-        emptyStars = 5 - (movieRate / 2);
-    }
-    let totalStars = "";
-    for (let i = 0; i < fillStars; i++) {
-        totalStars += fillStar;
-    }
-    for (let i = 0; i < halfStars; i++) {
-        totalStars += halfStar;
-    }
-    for (let i = 0; i < emptyStars; i++) {
-        totalStars += emptyStar;
-    }
-    return totalStars;
-}
-
-async function getMoviesJson() {
-    const movies = await fetch(apiURL, {
-        method: 'GET',
-        headers: { 'content-type': 'application/json' },
-    }).then(res => {
-        if (res.ok) {
-            return res.json();
-        }
-    }).catch(err => {
-        return { error: "Error al obtener datos" };
-    });
-
-    return movies;
-}
-
-async function getMovies() {
-    const movies = await fetch(apiURL, {
-        method: 'GET',
-        headers: { 'content-type': 'application/json' },
-    }).then(res => {
-        if (res.ok) {
-            return res.json();
-        }
-    }).catch(err => {
-        return { error: "Error al obtener datos" };
-    });
-    if (movies.error) {
-        moviesData.innerHTML = `
-        <tr><td colspan=7 class="px-2 text-center">${movies.error}</td><tr>`;
-    }
-    movies.map(movie => {
-        const stars = getStars(movie.rate);
-        movie.rate = stars;
-    });
-
-    movies.forEach((movie) => {
-        moviesData.innerHTML += `
-        <tr class="even:bg-emerald-100 odd:bg-emerald-50" data-movie-id="${movie.id}">
-            <td class="px-2 py-1 text-center">${movie.id}</td>
-            <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-30 h-46 object-cover"></td>
-            <td class="px-2 py-1 text-wrap">${movie.title}</td>
-            <td class="px-2 py-1 text-center">${movie.year}</td>
-            <td class="px-2 py-1 text-center text-wrap">${movie.genre}</td>
-            <td class="px-2 py-1 text-center">${movie.director}</td>
-            <td class="px-2 py-1 text-center text-yellow-400">${movie.rate}</td>
-            <td class="px-2 py-1 text-center">${movie.createdAt}</td>
-            <td class="px-2 py-1 text-center">
-            <div class="flex gap-3 justify-center text-lg px-2 py-1">
-                <div class="flex items-center justify-center size-8 text-xl bg-amber-400 hover:bg-amber-200 text-white rounded" 
-                    onclick="updateForm(${movie.id})"><i class="bi bi-pencil"></i></div>
-                <div class="flex items-center justify-center size-8 text-xl bg-red-500 hover:bg-red-200 text-white rounded" 
-                onclick="deleteMovie(${movie.id})"><i class="bi bi-trash3-fill"></i></div>
-            </div>
-            </td>
-        </tr>        
-        `
-    });
-
-}
-
-
-
-function fillData(moviesArr, dataStyle) {
-
-    const movies = moviesArr;
-    if (dataStyle == 'list') {
-        moviesData.innerHTML = '';
-        movies.forEach((movie) => {
-            moviesData.innerHTML += `
-        <tr class="even:bg-emerald-100 odd:bg-emerald-50" data-movie-id="${movie.id}">
-            <td class="px-2 py-1 text-center">${movie.id}</td>
-            <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-30 h-46 object-cover"></td>
-            <td class="px-2 py-1 text-wrap">${movie.title}</td>
-            <td class="px-2 py-1 text-center">${movie.year}</td>
-            <td class="px-2 py-1 text-center text-wrap">${movie.genre}</td>
-            <td class="px-2 py-1 text-center">${movie.director}</td>
-            <td class="px-2 py-1 text-center text-yellow-400">${movie.rate}</td>
-            <td class="px-2 py-1 text-center">${movie.createdAt}</td>
-            <td class="px-2 py-1 text-center">
-            <div class="flex gap-3 justify-center text-lg px-2 py-1">
-                <div class="flex items-center justify-center size-8 text-xl bg-amber-400 hover:bg-amber-200 text-white rounded" 
-                    onclick="updateForm(${movie.id})"><i class="bi bi-pencil"></i></div>
-                <div class="flex items-center justify-center size-8 text-xl bg-red-500 hover:bg-red-200 text-white rounded" 
-                onclick="deleteMovie(${movie.id})"><i class="bi bi-trash3-fill"></i></div>
-            </div>
-            </td>
-        </tr>        
-        `
-        });
-    }
-    if (dataStyle == 'card') {
-        cardDataSection.innerHTML = '';
-        movies.forEach(movie => {
-            cardDataSection.innerHTML += `
-                    <div
-            class="flex flex-col justify-center items-center rounded bg-emerald-800 shadow-[10px_15px_30px] shadow-teal-600">
-            <div class="w-full bg-emerald-600 rounded ">
-                <img src="${movie.poster}"
-                    alt=""
-                    class="h-70 w-full object-cover rounded hover:mask-b-from-20% hover:mask-b-to-90% hover:transition-all">
-            </div>
-            <div class="p-3">
-                <div>
-                    <h3 class="text-xl text-white">${movie.title}</h3>
-                </div>
-                <ul>
-                    <li><span class="text-yellow-400 text-2xl">${movie.rate}</span> </li>
-                    <li class="text-white text-xl">${movie.year}</li>
-                    <li class="text-white">${movie.director}</li>
-                    <li class="flex gap-2 my-2 justify-start">
-                       ${movie.genre}
-                    </li>
-                </ul>
-            </div>
-            <div class="flex gap-2 justify-center pt-2 pb-4">
-                <button
-                    class="bg-emerald-500 hover:inset-ring-2 hover:inset-ring-orange-500 text-white font-semibold px-2 py-1 rounded">Editar</button>
-                <button
-                    class="bg-emerald-600 hover:bg-red-400 font-semibold text-white px-2 py-1 rounded">Eliminar</button>
-            </div>
-        </div>
-            `
-        })
-    }
-
-}
-async function showDataStyle(style) {
-    const styleSet = dataTypeStyle.dataset.listType;
-    if (styleSet == style) {
-        return;
-    }
-    if (style == 'list') {
-        dataTypeStyle.dataset.listType = 'list';
-        dataCardBtn.classList.remove('bg-emerald-500');
-        dataListBtn.classList.add('bg-emerald-500');
-        sectionSwitcher(cardDataSection, listDataSection);
-        const movies = await getMoviesJson();
-        if (movies.error) {
-            moviesData.innerHTML = `
-        <tr><td colspan=7 class="px-2 text-center">${movies.error}</td><tr>`;
-            return;
-        }
-        if (movies) {
-            movies.map(movie => {
-                const stars = getStars(movie.rate);
-                movie.rate = stars;
-            });
-            const dataStyle = dataTypeStyle.dataset.listType;
-            fillData(movies, dataStyle);
-        }
-    }
-    if (style == 'card') {
-        dataTypeStyle.dataset.listType = 'card';
-        dataListBtn.classList.remove('bg-emerald-500');
-        dataCardBtn.classList.add('bg-emerald-500');
-        sectionSwitcher(listDataSection, cardDataSection);
-        const movies = await getMoviesJson();
-        if (movies.error) {
-            cardDataSection.innerHTML = `
-        <p>${movies.error}</p>`;
-            return;
-        }
-        if (movies) {
-            movies.map(movie => {
-                const stars = getStars(movie.rate);
-                movie.rate = stars;
-                const genres = movie.genre.split(", ")
-                let genresCard = '';
-                for (let i = 0; i < genres.length; i++) {
-                    const genre = genres[i];
-                    let genrePill = `<span class="flex justify-center items-center text-sm rounded-lg px-2 font-semibold text-green-50 bg-orange-600">${genre}</span>`;
-                    genresCard += genrePill;
-                }
-                movie.genre = genresCard;
-            });
-            const dataStyle = dataTypeStyle.dataset.listType;
-            fillData(movies, dataStyle);
-        }
-    }
-    const test = dataTypeStyle.dataset.listType;
-    console.log('data-list-type: ', test);
-}
 async function submitMovie(movie) {
     await fetch(apiURL, {
         method: 'POST',
@@ -384,24 +201,211 @@ async function submitMovie(movie) {
     })
 }
 
+async function getMovies() {
+    const movies = await fetch(apiURL, {
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+    }).then(res => {
+        if (res.ok) {
+            return res.json();
+        }
+    }).catch(err => {
+        return { error: "Error al obtener datos" };
+    });
+
+    return movies;
+}
+
+// async function getMovies() {
+//     const movies = await fetch(apiURL, {
+//         method: 'GET',
+//         headers: { 'content-type': 'application/json' },
+//     }).then(res => {
+//         if (res.ok) {
+//             return res.json();
+//         }
+//     }).catch(err => {
+//         return { error: "Error al obtener datos" };
+//     });
+//     if (movies.error) {
+//         moviesData.innerHTML = `
+//         <tr><td colspan=7 class="px-2 text-center">${movies.error}</td><tr>`;
+//     }
+//     movies.map(movie => {
+//         const stars = getStars(movie.rate);
+//         movie.rate = stars;
+//     });
+
+//     movies.forEach((movie) => {
+//         moviesData.innerHTML += `
+//         <tr class="even:bg-emerald-100 odd:bg-emerald-50" data-movie-id="${movie.id}">
+//             <td class="px-2 py-1 text-center">${movie.id}</td>
+//             <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-30 h-46 object-cover"></td>
+//             <td class="px-2 py-1 text-wrap">${movie.title}</td>
+//             <td class="px-2 py-1 text-center">${movie.year}</td>
+//             <td class="px-2 py-1 text-center text-wrap">${movie.genre}</td>
+//             <td class="px-2 py-1 text-center">${movie.director}</td>
+//             <td class="px-2 py-1 text-center text-yellow-400">${movie.rate}</td>
+//             <td class="px-2 py-1 text-center">${movie.createdAt}</td>
+//             <td class="px-2 py-1 text-center">
+//             <div class="flex gap-3 justify-center text-lg px-2 py-1">
+//                 <div class="flex items-center justify-center size-8 text-xl bg-amber-400 hover:bg-amber-200 text-white rounded" 
+//                     onclick="updateForm(${movie.id})"><i class="bi bi-pencil"></i></div>
+//                 <div class="flex items-center justify-center size-8 text-xl bg-red-500 hover:bg-red-200 text-white rounded" 
+//                 onclick="deleteMovie(${movie.id})"><i class="bi bi-trash3-fill"></i></div>
+//             </div>
+//             </td>
+//         </tr>        
+//         `
+//     });
+
+// }
+
+
+function fillData(moviesArr, dataStyle) {
+
+    const movies = moviesArr;
+    if (dataStyle == 'list') {
+        moviesData.innerHTML = '';
+        movies.forEach((movie) => {
+            let stars;
+            stars = getStars(movie.rate);
+            moviesData.innerHTML += `
+            <tr class="even:bg-emerald-100 odd:bg-emerald-50" data-movie-id="${movie.id}">
+                <td class="px-2 py-1 text-center">${movie.id}</td>
+                <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-30 h-46 object-cover"></td>
+                <td class="px-2 py-1 text-wrap">${movie.title}</td>
+                <td class="px-2 py-1 text-center">${movie.year}</td>
+                <td class="px-2 py-1 text-center text-wrap">${movie.genre}</td>
+                <td class="px-2 py-1 text-center">${movie.director}</td>
+                <td class="px-2 py-1 text-center text-yellow-400">${stars}</td>
+                <td class="px-2 py-1 text-center">${movie.createdAt}</td>
+                <td class="px-2 py-1 text-center">
+                <div class="flex gap-3 justify-center text-lg px-2 py-1">
+                    <div class="flex items-center justify-center size-8 text-xl bg-amber-400 hover:bg-amber-200 text-white rounded" 
+                        onclick="updateForm(${movie.id})"><i class="bi bi-pencil"></i></div>
+                    <div class="flex items-center justify-center size-8 text-xl bg-red-500 hover:bg-red-200 text-white rounded" 
+                    onclick="deleteMovie(${movie.id})"><i class="bi bi-trash3-fill"></i></div>
+                </div>
+                </td>
+            </tr>        
+            `
+        });
+    }
+    if (dataStyle == 'card') {
+
+        cardDataSection.innerHTML = '';
+        movies.forEach(movie => {
+            let stars;
+            stars = getStars(movie.rate);
+            const genres = movie.genre.split(", ")
+            let genresCard = '';
+            for (let i = 0; i < genres.length; i++) {
+                const genre = genres[i];
+                let genrePill = `<span class="flex justify-center items-center text-sm rounded-lg px-2 font-semibold text-green-50 bg-orange-600">${genre}</span>`;
+                genresCard += genrePill;
+            }
+            cardDataSection.innerHTML += `
+                    <div
+            class="flex flex-col justify-center items-center rounded bg-emerald-800 shadow-[10px_15px_30px] shadow-teal-600">
+            <div class="w-full bg-emerald-600 rounded ">
+                <img src="${movie.poster}"
+                    alt=""
+                    class="h-70 w-full object-cover rounded hover:mask-b-from-20% hover:mask-b-to-90% hover:transition-all">
+            </div>
+            <div class="p-3">
+                <div>
+                    <h3 class="text-xl text-white">${movie.title}</h3>
+                </div>
+                <ul>
+                    <li><span class="text-yellow-400 text-2xl">${stars}</span> </li>
+                    <li class="text-white text-xl">${movie.year}</li>
+                    <li class="text-white">${movie.director}</li>
+                    <li class="flex gap-2 my-2 justify-start">
+                       ${genresCard}
+                    </li>
+                </ul>
+            </div>
+            <div class="flex gap-2 justify-center pt-2 pb-4">
+                <button
+                    class="bg-emerald-500 hover:inset-ring-2 hover:inset-ring-orange-500 text-white font-semibold px-2 py-1 rounded">Editar</button>
+                <button
+                    class="bg-emerald-600 hover:bg-red-400 font-semibold text-white px-2 py-1 rounded">Eliminar</button>
+            </div>
+        </div>
+            `
+        })
+    }
+
+}
+
+async function showDataStyle(style) {
+    const styleSet = dataTypeStyle.dataset.listType;
+    if (styleSet == style) {
+        return;
+    }
+    if (style == 'list') {
+        dataTypeStyle.dataset.listType = 'list';
+        dataCardBtn.classList.remove('bg-emerald-500');
+        dataListBtn.classList.add('bg-emerald-500');
+        sectionSwitcher(cardDataSection, listDataSection);
+        if (!MOVIES) {
+            MOVIES = await getMovies();
+        }
+        if (MOVIES.error) {
+            moviesData.innerHTML = `
+        <tr><td colspan=7 class="px-2 text-center">${MOVIES.error}</td><tr>`;
+            return;
+        }
+        if (MOVIES) {
+            const dataStyle = dataTypeStyle.dataset.listType;
+            fillData(MOVIES, dataStyle);
+        }
+    }
+    if (style == 'card') {
+        dataTypeStyle.dataset.listType = 'card';
+        dataListBtn.classList.remove('bg-emerald-500');
+        dataCardBtn.classList.add('bg-emerald-500');
+        sectionSwitcher(listDataSection, cardDataSection);
+        if (!MOVIES) {
+            MOVIES = await getMovies();
+        }
+        if (MOVIES.error) {
+            cardDataSection.innerHTML = `
+        <p>${MOVIES.error}</p>`;
+            return;
+        }
+        if (MOVIES) {
+            const dataStyle = dataTypeStyle.dataset.listType;
+            fillData(MOVIES, dataStyle);
+        }
+    }
+}
+
 formBtn.addEventListener('click', async (event) => {
     event.preventDefault();
     const newMovie = createMovie(title.value, year.value, director.value, poster.value, genre.value, rate.value);
     await submitMovie(newMovie);
-    await getMovies();
+    MOVIES = await getMovies();
+    const dataStyle = dataTypeStyle.dataset.listType;
+    fillData(MOVIES, dataStyle)
 });
 
 refreshBtn.addEventListener('click', async () => {
     refreshDataAnimation.classList.remove('hidden');
     moviesData.innerHTML = "";
-    await getMovies();
+    MOVIES = await getMovies();
+    const dataStyle = dataTypeStyle.dataset.listType;
+    fillData(MOVIES, dataStyle)
     refreshDataAnimation.classList.add('hidden');
 })
 
 mockBtn.addEventListener('click', async () => {
     await insertMockData().then(async () => {
         moviesData.innerHTML = "";
-        await getMovies();
+        MOVIES = await getMovies();
+        const dataStyle = dataTypeStyle.dataset.listType;
+        fillData(MOVIES, dataStyle)
     })
 })
 
