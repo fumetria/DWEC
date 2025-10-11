@@ -216,52 +216,6 @@ async function getMovies() {
     return movies;
 }
 
-// async function getMovies() {
-//     const movies = await fetch(apiURL, {
-//         method: 'GET',
-//         headers: { 'content-type': 'application/json' },
-//     }).then(res => {
-//         if (res.ok) {
-//             return res.json();
-//         }
-//     }).catch(err => {
-//         return { error: "Error al obtener datos" };
-//     });
-//     if (movies.error) {
-//         moviesData.innerHTML = `
-//         <tr><td colspan=7 class="px-2 text-center">${movies.error}</td><tr>`;
-//     }
-//     movies.map(movie => {
-//         const stars = getStars(movie.rate);
-//         movie.rate = stars;
-//     });
-
-//     movies.forEach((movie) => {
-//         moviesData.innerHTML += `
-//         <tr class="even:bg-emerald-100 odd:bg-emerald-50" data-movie-id="${movie.id}">
-//             <td class="px-2 py-1 text-center">${movie.id}</td>
-//             <td class="px-3 py-2 text-center"><img src="${movie.poster}" class="w-30 h-46 object-cover"></td>
-//             <td class="px-2 py-1 text-wrap">${movie.title}</td>
-//             <td class="px-2 py-1 text-center">${movie.year}</td>
-//             <td class="px-2 py-1 text-center text-wrap">${movie.genre}</td>
-//             <td class="px-2 py-1 text-center">${movie.director}</td>
-//             <td class="px-2 py-1 text-center text-yellow-400">${movie.rate}</td>
-//             <td class="px-2 py-1 text-center">${movie.createdAt}</td>
-//             <td class="px-2 py-1 text-center">
-//             <div class="flex gap-3 justify-center text-lg px-2 py-1">
-//                 <div class="flex items-center justify-center size-8 text-xl bg-amber-400 hover:bg-amber-200 text-white rounded" 
-//                     onclick="updateForm(${movie.id})"><i class="bi bi-pencil"></i></div>
-//                 <div class="flex items-center justify-center size-8 text-xl bg-red-500 hover:bg-red-200 text-white rounded" 
-//                 onclick="deleteMovie(${movie.id})"><i class="bi bi-trash3-fill"></i></div>
-//             </div>
-//             </td>
-//         </tr>        
-//         `
-//     });
-
-// }
-
-
 function fillData(moviesArr, dataStyle) {
 
     const movies = moviesArr;
@@ -283,9 +237,9 @@ function fillData(moviesArr, dataStyle) {
                 <td class="px-2 py-1 text-center">
                 <div class="flex gap-3 justify-center text-lg px-2 py-1">
                     <div class="flex items-center justify-center size-8 text-xl bg-amber-400 hover:bg-amber-200 text-white rounded" 
-                        onclick="updateForm(${movie.id})"><i class="bi bi-pencil"></i></div>
+                        onclick="updateForm(${movie.id})" title="Editar película"><i class="bi bi-pencil"></i></div>
                     <div class="flex items-center justify-center size-8 text-xl bg-red-500 hover:bg-red-200 text-white rounded" 
-                    onclick="deleteMovie(${movie.id})"><i class="bi bi-trash3-fill"></i></div>
+                    onclick="deleteMovie(${movie.id})" title="Eliminar película"><i class="bi bi-trash3-fill"></i></div>
                 </div>
                 </td>
             </tr>        
