@@ -336,6 +336,41 @@ async function showDataStyle(style) {
     }
 }
 
+async function orderBy(type) {
+    let orderType = document.getElementById('table-mtitle');
+    console.log('Ordenando...')
+    const movies = MOVIES;
+    console.log(movies);
+    const moviesOrdered = MOVIES.sort((a, b) => {
+        if (typeof a[type] === "string") {
+            return a[type].localeCompare(b[type]); // Ordena cadenas alfabéticamente
+        }
+        return a[type] - b[type]; // Ordena números
+    });
+    console.log(moviesOrdered);
+    const dataStyle = dataTypeStyle.dataset.listType;
+    fillData(moviesOrdered, dataStyle);
+    // if (orderType.dataset.orderBy == 'desc') {
+    //     orderType.dataset.orderBy == '';
+    //     moviesOrdered = MOVIES;
+    //     const dataStyle = dataTypeStyle.dataset.listType;
+    //     fillData(MOVIES, dataStyle);
+    //     return;
+    // }
+    // if (orderType.dataset.orderBy == '') {
+    //     orderType.dataset.orderBy == 'asc';
+    //     const dataStyle = dataTypeStyle.dataset.listType;
+    //     fillData(moviesOrdered, dataStyle);
+    //     return;
+    // }
+    // if (orderType.dataset.orderBy == 'asc') {
+    //     orderType.dataset.orderBy == 'desc';
+    //     const dataStyle = dataTypeStyle.dataset.listType;
+    //     fillData(moviesOrdered, dataStyle);
+    //     return;
+    // }
+}
+
 formBtn.addEventListener('click', async (event) => {
     event.preventDefault();
     const newMovie = createMovie(title.value, year.value, director.value, poster.value, genre.value, rate.value);
@@ -368,19 +403,6 @@ formUpdateBtn.addEventListener('click', async (event) => {
     await updateMovie(title.value, year.value, director.value, poster.value, genre.value, rate.value, id.value);
 })
 
-async function getMoviesCard() {
-    const movie = await fetch(apiURL + '/1', {
-        method: 'GET',
-        headers: { 'content-type': 'application/json' },
-    }).then(res => {
-        if (res.ok) {
-            return res.json();
-        }
-    }).catch(err => {
-        return { error: "Error al obtener datos" };
-    });
 
-
-}
 
 

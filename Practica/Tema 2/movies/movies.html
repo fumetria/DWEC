@@ -197,7 +197,7 @@
                     </button>
                     <input class="outline-none border-none bg-transparent flex-1" type="text" placeholder="Buscar">
                 </div>
-                <div id="data-type-switcher" class="flex flex-row justify-center items-center bg-stone-300 rounded"
+                <div id="data-type-switcher" class="flex flex-row justify-center items-center bg-stone-300 rounded mx-2"
                     data-list-type="list">
                     <div class="p-2 rounded" id="card-list-btn" onclick="showDataStyle('card')">
                         <button class="text-stone-100"><i class="bi bi-microsoft"></i></button>
@@ -213,11 +213,12 @@
                     <thead class="bg-emerald-500 text-white">
                         <th class="px-2 py-2">ID</th>
                         <th class="px-2 py-2">PORTADA</th>
-                        <th class="px-2 py-2">TÍTULO</th>
+                        <th id="table-mtitle" class="px-2 py-2" data-order-by=""><button
+                                onclick="orderBy('title')">TÍTULO</button></th>
                         <th class="px-2 py-2">AÑO</th>
                         <th class="px-2 py-2">GÉNERO</th>
                         <th class="px-2 py-2">DIRECTOR</th>
-                        <th class="px-2 py-2">PUNTUACIÓN</th>
+                        <th class="px-2 py-2" onclick="orderBy('rate')">PUNTUACIÓN</th>
                         <th class="px-2 py-2">FECHA CREACIÓN</th>
                         <th class="px-2 py-2">ACCIONES</th>
                     </thead>
