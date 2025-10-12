@@ -282,9 +282,9 @@ function fillData(moviesArr, dataStyle) {
             </div>
             <div class="flex gap-2 justify-center items-center pb-2">
                 <button
-                    class="bg-emerald-500 hover:inset-ring-2 hover:inset-ring-orange-500 text-white font-semibold px-2 py-1 rounded">Editar</button>
+                    class="bg-emerald-500 hover:inset-ring-2 hover:inset-ring-orange-500 text-white font-semibold px-2 py-1 rounded" onclick="updateForm(${movie.id})" title="Editar película">Editar</button>
                 <button
-                    class="bg-emerald-600 hover:bg-red-400 font-semibold text-white px-2 py-1 rounded">Eliminar</button>
+                    class="bg-emerald-600 hover:bg-red-400 font-semibold text-white px-2 py-1 rounded" onclick="deleteMovie(${movie.id})" title="Eliminar película">Eliminar</button>
             </div>
         </div>
             `
