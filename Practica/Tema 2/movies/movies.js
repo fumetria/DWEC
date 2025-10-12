@@ -261,15 +261,15 @@ function fillData(moviesArr, dataStyle) {
             }
             cardDataSection.innerHTML += `
                     <div
-            class="flex flex-col justify-center items-center rounded bg-emerald-800 shadow-[10px_15px_30px] shadow-teal-600">
+            class="flex flex-col justify-between rounded bg-emerald-800 shadow-md">
             <div class="w-full bg-emerald-600 rounded ">
                 <img src="${movie.poster}"
                     alt=""
                     class="h-70 w-full object-cover rounded hover:mask-b-from-20% hover:mask-b-to-90% hover:transition-all">
             </div>
-            <div class="p-3">
+            <div class="px-2 pt-2 pb-1">
                 <div>
-                    <h3 class="text-xl text-white">${movie.title}</h3>
+                    <h3 class="text-lg text-white">${movie.title}</h3>
                 </div>
                 <ul>
                     <li><span class="text-yellow-400 text-2xl">${stars}</span> </li>
@@ -280,7 +280,7 @@ function fillData(moviesArr, dataStyle) {
                     </li>
                 </ul>
             </div>
-            <div class="flex gap-2 justify-center pt-2 pb-4">
+            <div class="flex gap-2 justify-center items-center pb-2">
                 <button
                     class="bg-emerald-500 hover:inset-ring-2 hover:inset-ring-orange-500 text-white font-semibold px-2 py-1 rounded">Editar</button>
                 <button
