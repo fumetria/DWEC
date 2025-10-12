@@ -156,6 +156,11 @@ async function deleteMovie(movieId) {
         method: 'DELETE',
     }).then(async res => {
         if (res.ok) {
+            if (dataTypeStyle.dataset.listType == 'card') {
+                const movieCard = document.querySelector(`div[data-card-id="${movieId}"]`);
+                let removedRow = cardDataSection.removeChild(movieCard);
+                return;
+            }
             const movieRow = document.querySelector(`tr[data-movie-id="${movieId}"]`);
             let removedRow = moviesData.removeChild(movieRow);
         }
@@ -216,6 +221,12 @@ async function getMovies() {
     return movies;
 }
 
+/**
+ * Muestra en pantalla el listado de películas que dispone la API. Podemos mostrarlo
+ *  en forma de tabla o listado de tarjetas.
+ * @param {Array} moviesArr 
+ * @param {string} dataStyle 
+ */
 function fillData(moviesArr, dataStyle) {
 
     const movies = moviesArr;
@@ -261,7 +272,7 @@ function fillData(moviesArr, dataStyle) {
             }
             cardDataSection.innerHTML += `
                     <div
-            class="flex flex-col justify-between rounded bg-emerald-800 shadow-md">
+            class="flex flex-col justify-between rounded bg-emerald-800 shadow-md" data-card-id="${movie.id}">
             <div class="w-full bg-emerald-600 rounded ">
                 <img src="${movie.poster}"
                     alt=""
@@ -337,39 +348,55 @@ async function showDataStyle(style) {
 }
 
 async function orderBy(type) {
-    let orderType = document.getElementById('table-mtitle');
-    console.log('Ordenando...')
-    const movies = MOVIES;
-    console.log(movies);
-    const moviesOrdered = MOVIES.sort((a, b) => {
-        if (typeof a[type] === "string") {
-            return a[type].localeCompare(b[type]); // Ordena cadenas alfabéticamente
-        }
-        return a[type] - b[type]; // Ordena números
-    });
-    console.log(moviesOrdered);
+    const orderType = document.getElementById('table-mtitle');
     const dataStyle = dataTypeStyle.dataset.listType;
+    const movies = [...MOVIES]; // copia del array original
+    const currentOrder = orderType.dataset.orderBy || '';
+
+    console.log('Orden actual:', currentOrder);
+
+    // Determinar el siguiente estado
+    let nextOrder;
+    if (currentOrder === '') {
+        nextOrder = 'asc';
+    } else if (currentOrder === 'asc') {
+        nextOrder = 'desc';
+    } else {
+        nextOrder = ''; // resetear orden
+    }
+
+    // Actualizar el atributo del elemento
+    orderType.dataset.orderBy = nextOrder;
+
+    console.log('Nuevo orden:', nextOrder);
+
+    // Si el orden se resetea, mostramos el listado original
+    if (nextOrder === '') {
+        fillData(MOVIES, dataStyle);
+        return;
+    }
+
+    // Ordenar según el tipo de dato y la dirección
+    const moviesOrdered = movies.sort((a, b) => {
+        const valA = a[type];
+        const valB = b[type];
+
+        if (typeof valA === 'string' && typeof valB === 'string') {
+            return nextOrder === 'asc'
+                ? valA.localeCompare(valB)
+                : valB.localeCompare(valA);
+        }
+
+        return nextOrder === 'asc'
+            ? Number(valA) - Number(valB)
+            : Number(valB) - Number(valA);
+    });
+
+    // Mostrar el resultado ordenado
     fillData(moviesOrdered, dataStyle);
-    // if (orderType.dataset.orderBy == 'desc') {
-    //     orderType.dataset.orderBy == '';
-    //     moviesOrdered = MOVIES;
-    //     const dataStyle = dataTypeStyle.dataset.listType;
-    //     fillData(MOVIES, dataStyle);
-    //     return;
-    // }
-    // if (orderType.dataset.orderBy == '') {
-    //     orderType.dataset.orderBy == 'asc';
-    //     const dataStyle = dataTypeStyle.dataset.listType;
-    //     fillData(moviesOrdered, dataStyle);
-    //     return;
-    // }
-    // if (orderType.dataset.orderBy == 'asc') {
-    //     orderType.dataset.orderBy == 'desc';
-    //     const dataStyle = dataTypeStyle.dataset.listType;
-    //     fillData(moviesOrdered, dataStyle);
-    //     return;
-    // }
 }
+
+
 
 formBtn.addEventListener('click', async (event) => {
     event.preventDefault();

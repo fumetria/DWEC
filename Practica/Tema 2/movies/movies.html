@@ -208,13 +208,12 @@
                 </div>
             </section>
             <div id="list-data" class="h-screen overflow-y-scroll">
-                <table class="border-collapse table-auto w-full overflow-y-scroll ">
+                <table id="table-mtitle" class="border-collapse table-auto w-full overflow-y-scroll " data-order-by="">
                     <caption class="bg-emerald-700 text-white font-bold">Listado peliculas</caption>
                     <thead class="bg-emerald-500 text-white">
                         <th class="px-2 py-2">ID</th>
                         <th class="px-2 py-2">PORTADA</th>
-                        <th id="table-mtitle" class="px-2 py-2" data-order-by=""><button
-                                onclick="orderBy('title')">TÍTULO</button></th>
+                        <th class="px-2 py-2"><button onclick="orderBy('title')">TÍTULO</button></th>
                         <th class="px-2 py-2">AÑO</th>
                         <th class="px-2 py-2">GÉNERO</th>
                         <th class="px-2 py-2">DIRECTOR</th>
@@ -226,7 +225,7 @@
                 </table>
             </div>
             <div id="card-data"
-                class="h-screen bg-stone-200 grid grid-cols-5 gap-6 hidden overflow-y-scroll px-2 py-2 ">
+                class="h-screen bg-stone-200 grid grid-cols-5 gap-4 hidden overflow-y-scroll px-2 py-2 ">
 
             </div>
         </section>
