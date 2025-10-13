@@ -251,6 +251,11 @@ function fillData(moviesArr, dataStyle) {
 
     const movies = moviesArr;
     if (dataStyle == 'list') {
+        if (MOVIES.error) {
+            moviesData.innerHTML = `
+        <tr><td colspan=7 class="px-2 text-center">${MOVIES.error}</td><tr>`;
+            return;
+        }
         moviesData.innerHTML = '';
         movies.forEach((movie) => {
             let stars;
@@ -456,7 +461,10 @@ formUpdateBtn.addEventListener('click', async (event) => {
 searchBar.addEventListener('click', async () => {
     const queryInput = query.value;
     moviesData.innerHTML = "";
-    const MOVIES = await querySearch(queryInput);
+    MOVIES = await querySearch(queryInput);
+    if (MOVIES == null) {
+        MOVIES = { error: 'Película no encontrada' };
+    };
     query.value = '';
     const dataStyle = dataTypeStyle.dataset.listType;
     fillData(MOVIES, dataStyle)
