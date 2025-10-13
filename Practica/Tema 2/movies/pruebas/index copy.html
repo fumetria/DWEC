@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+
+<body class="flex flex-col justify-between h-screen mx-auto bg-stone-200">
+    <header class="flex gap-2 py-2 px-3 justify-start items-center w-full bg-stone-50 h-18 border-b border-stone-300">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="60">
+            <defs>
+                <style>
+                    .cls-2 {
+                        fill: #32314b
+                    }
+
+                    .cls-3 {
+                        fill: #27273d
+                    }
+
+                    .cls-4 {
+                        fill: #3e436d
+                    }
+
+                    .cls-5 {
+                        fill: #fff
+                    }
+
+                    .cls-6 {
+                        fill: #ddd
+                    }
+                </style>
+            </defs>
+            <circle cx="256" cy="256" r="256" style="fill:#5ee9b5" id="BULINE" class="bg-emerald-300" />
+            <g id="Icons">
+                <path class="cls-2" d="M69.17 191.1h375v216.15a17 17 0 0 1-17 17h-341a17 17 0 0 1-17-17V191.1z" />
+                <path class="cls-3"
+                    d="M444.17 191.1v44H126.41A27.91 27.91 0 0 0 98.5 263v161.27H86.18a17 17 0 0 1-17-17V191.1z" />
+                <circle class="cls-4" cx="421.91" cy="349.91" r="10.4" />
+                <circle class="cls-4" cx="421.91" cy="328.25" r="7.37" />
+                <rect class="cls-4" x="69.17" y="165.06" width="375" height="52.5" rx="4.85" />
+                <path class="cls-2"
+                    d="M444.17 207.06v5.65a4.85 4.85 0 0 1-4.85 4.85H74a4.85 4.85 0 0 1-4.86-4.85v-42.8a4.85 4.85 0 0 1 4.86-4.85h6.14v37.15a4.85 4.85 0 0 0 4.86 4.85z" />
+                <path class="cls-5"
+                    d="M145.06 216.56h-37.07l27.8-51.5h37.07l-27.8 51.5zM222.56 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5zM300.06 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5zM377.56 217.56h-37.07l27.8-52.5h37.07l-27.8 52.5z" />
+                <path class="cls-6"
+                    d="m228.11 207.06-5.56 10.5h-37.06l5.56-10.5h37.06zM305.61 207.06l-5.56 10.5h-37.06l5.56-10.5h37.06zM383.11 207.06l-5.56 10.5h-37.06l5.56-10.5h37.06z" />
+                <rect class="cls-4" x="69.17" y="67.64" width="375" height="52.5" rx="4.85"
+                    transform="rotate(-13.37 256.601 93.863)" />
+                <path class="cls-2"
+                    d="m442.74 65.87 1.3 5.5a4.85 4.85 0 0 1-3.59 5.84l-355.4 84.44a4.85 4.85 0 0 1-5.85-3.6l-9.89-41.64a4.85 4.85 0 0 1 3.6-5.84l6-1.42 8.58 36.15a4.86 4.86 0 0 0 5.85 3.59z" />
+                <path class="cls-5"
+                    d="m154.15 145.23-36.07 8.57L133 96.3l36.06-8.57-14.91 57.5zM229.55 127.32l-36.06 8.57 14.91-57.51 36.06-8.57-14.91 57.51zM304.95 109.4l-36.06 8.57 14.91-57.5 36.06-8.57-14.91 57.5zM380.35 91.49l-36.06 8.57 14.91-57.51 36.06-8.57-14.91 57.51z" />
+                <path class="cls-6"
+                    d="m157.13 133.73-2.98 11.5-36.06 8.57 2.98-11.5 36.06-8.57zM232.53 115.82l-2.98 11.5-36.06 8.56 2.98-11.5 36.06-8.56zM307.93 97.9l-2.98 11.5-36.06 8.57 2.98-11.5 36.06-8.57zM383.33 79.99l-2.98 11.5-36.06 8.57 2.98-11.51 36.06-8.56z" />
+                <path class="cls-3"
+                    d="M166.87 217.56H89.55A9.56 9.56 0 0 1 80 208v-78.55A11.48 11.48 0 0 1 91.46 118h33.76a11.48 11.48 0 0 1 9.63 5.22l46.43 71.33a16 16 0 0 1-14.41 23.01z" />
+                <circle class="cls-5" cx="97.99" cy="198.43" r="7.33" />
+                <circle class="cls-5" cx="97.99" cy="136.43" r="7.33" />
+                <circle class="cls-5" cx="161.73" cy="198.43" r="7.33" />
+                <path class="cls-5"
+                    d="M416.74 316.43a5.17 5.17 0 1 0 0-10.33h-71.08v-50.66h71.08a5.17 5.17 0 1 0 0-10.33H96.41a5.17 5.17 0 1 0 0 10.33h71.28v50.66H96.41a5.17 5.17 0 1 0 0 10.33h155v51.5h-155a5.17 5.17 0 1 0 0 10.33h155v33.42a5.09 5.09 0 0 0 5.09 5.09h.16a5.08 5.08 0 0 0 5.08-5.09v-33.42h155a5.17 5.17 0 1 0 0-10.33h-155v-51.5zm-81.42-10.33h-73.58v-50.66h73.58zm-157.32 0v-50.66h73.38v50.66z" />
+            </g>
+        </svg>
+        <h1 class="uppercase text-blue-900 text-6xl font-mono">películas</h1>
+    </header>
+    <main class="bg-stone-200 grid grid-cols-7 mx-2 justify-start">
+        <section class="col-span-2 flex flex-col justify-start w-70 lg:w-lg bg-stone-100 rounded">
+            <form action="#" class="px-4 py-2 my-4 rounded">
+                <div class="flex flex-col mx-2 my-3">
+                    <label for="title">Título</label>
+                    <input type="text" id="title" class="border max-w-120 rounded ">
+                </div>
+                <div class="flex flex-col mx-2 my-3">
+                    <label for="year">Año</label>
+                    <input type="number" id="year" class="border max-w-120 rounded">
+                </div>
+                <div class="flex flex-col mx-2 my-3">
+                    <label for="director">Director</label>
+                    <input type="text" id="director" class="border max-w-120 rounded">
+                </div>
+                <div class="flex flex-col mx-2 my-3">
+                    <label for="poster">Poster</label>
+                    <input type="text" id="poster" class="border max-w-120 rounded">
+                </div>
+                <div class="flex flex-col mx-2 my-3">
+                    <label for="genre">Género</label>
+                    <input type="text" id="genre" class="border max-w-120 rounded">
+                </div>
+                <div class="flex flex-col mx-2 my-3">
+                    <label for="rate">Puntuación</label>
+                    <input type="number" id="rate" class="border max-w-120 rounded" max="10" min="
+                0" step="1">
+                </div>
+                <div class="flex flex-col mx-2 my-3">
+                    <input type="text" id="id" class="border max-w-120 rounded hidden" max="10" min="
+                0" step="1">
+                </div>
+                <div class="flex justify-center">
+                    <button type="submit" id="form-btn"
+                        class="py-1 px-3 text-white rounded bg-orange-500">Añadir</button>
+                    <button type="submit" id="form-update-btn" class="py-1 px-3 text-white rounded bg-sky-500 hidden">
+                        Actualizar
+                    </button>
+                </div>
+            </form>
+        </section>
+        <section class="col-span-5 mx-4 ">
+            <div class="my-3 flex gap-4 overflow-scroll">
+                <button class="py-1 px-3 flex gap-1 items-center justify-center text-white rounded bg-orange-500"
+                    id="refresh-btn">
+                    <p>Actualizar</p>
+                    <span><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            class="fill-white hidden" id="update-spin">
+                            <style>
+                                .spinner_P7sC {
+                                    transform-origin: center;
+                                    animation: spinner_svv2 .75s infinite linear
+                                }
+
+                                @keyframes spinner_svv2 {
+                                    100% {
+                                        transform: rotate(360deg)
+                                    }
+                                }
+                            </style>
+                            <path
+                                d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+                                class="spinner_P7sC" />
+                        </svg></span>
+                </button>
+                <button class="flex gap-1 items-center justify-center py-1 px-3 text-white rounded bg-sky-500"
+                    id="mock-btn">
+                    <p>Poblar</p>
+                    <span><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                            class="fill-white hidden" id="poblar-spin">
+                            <style>
+                                .spinner_P7sC {
+                                    transform-origin: center;
+                                    animation: spinner_svv2 .75s infinite linear
+                                }
+
+                                @keyframes spinner_svv2 {
+                                    100% {
+                                        transform: rotate(360deg)
+                                    }
+                                }
+                            </style>
+                            <path
+                                d="M10.14,1.16a11,11,0,0,0-9,8.92A1.59,1.59,0,0,0,2.46,12,1.52,1.52,0,0,0,4.11,10.7a8,8,0,0,1,6.66-6.61A1.42,1.42,0,0,0,12,2.69h0A1.57,1.57,0,0,0,10.14,1.16Z"
+                                class="spinner_P7sC" />
+                        </svg></span>
+                </button>
+            </div>
+            <div class="overflow-y-scroll">
+                <table class="border-collapse table-auto w-full">
+                    <caption class="bg-emerald-700 text-white font-bold">Listado peliculas</caption>
+                    <thead class="bg-emerald-500 text-white rounded">
+                        <th class="px-2 py-2">ID</th>
+                        <th class="px-2 py-2">PORTADA</th>
+                        <th class="px-2 py-2">TÍTULO</th>
+                        <th class="px-2 py-2">AÑO</th>
+                        <th class="px-2 py-2">GÉNERO</th>
+                        <th class="px-2 py-2">DIRECTOR</th>
+                        <th class="px-2 py-2">PUNTUACIÓN</th>
+                        <th class="px-2 py-2">FECHA CREACIÓN</th>
+                        <th class="px-2 py-2">ACCIONES</th>
+                    </thead>
+                    <tbody id="movies-data" class="overflow-scroll overscroll-containt"></tbody>
+                </table>
+            </div>
+
+        </section>
+    </main>
+    <footer class="bg-stone-100 flex justify-center w-full h-6 text-blue-900 text-s border-b border-stone-300 ">
+        <p class="italic">Creat per Fu Jun Fu Lin</p>
+    </footer>
+    <script src="./movies.js"></script>
+</body>
+
+</html>

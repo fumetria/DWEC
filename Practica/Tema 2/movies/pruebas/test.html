@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CineAdd - Add and List Movies</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "rgb(16 185 129)", // emerald-500
+                        "primary-focus": "rgb(5 150 105)", // emerald-600
+                        "accent": "rgb(249 115 22)", // orange-500
+                        "accent-focus": "rgb(234 88 12)", // orange-600
+                        "background": "rgb(245 245 244)", // stone-100
+                        "surface": "rgb(255 255 255)", // white
+                        "on-surface": "rgb(28 25 23)", // stone-900
+                        "on-surface-secondary": "rgb(87 83 78)", // stone-600
+                        "border-color": "rgb(214 211 209)" // stone-300
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-background font-display text-on-surface">
+    <div class="flex flex-col min-h-screen">
+        <header class="bg-background/80 backdrop-blur-sm sticky top-0 z-50 border-b border-border-color">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center gap-4">
+                        <div class="text-primary size-7">
+                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg font-bold text-on-surface">CineAdd</h2>
+                    </div>
+                    <div class="flex items-center gap-4 flex-1 justify-end">
+                        <div class="hidden md:flex relative items-center max-w-xs w-full">
+                            <input
+                                class="form-input w-full rounded-full border-border-color bg-surface pl-10 pr-4 h-10 text-sm text-on-surface placeholder:text-stone-400 focus:ring-primary focus:border-primary"
+                                placeholder="Search movies..." type="text" />
+                            <span class="material-symbols-outlined absolute left-3 text-on-surface-secondary">
+                                search
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <button
+                                class="hidden sm:flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary-focus transition-colors">
+                                <span>Add Movie</span>
+                            </button>
+                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAqC8uKmPM6VS43zNA0UtJ4bTp50V2niZ7YheFJQze0Et5NxFI4TgzamTt2wcJWfwyiSxV_rVO0f_iEPfU0C-L9bjyvtqAMTYIQvtCyyPDudnIdKM9gnZ6PL90cUhzgIgCdWp4Az_7tgCyk5_MevwYdyzOYeMyZNCAUERAIgYWwadYM1ZUqrBm7fjfucMZTI_iooQ4t4L1cMTrV5EHOdPcDYkFwEBUdMWBF2v-po8aFJO7s_jeamA5tY6ivEWVybfOh_5G-W-7GDZgJ");'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="lg:col-span-1">
+                    <div class="p-6 bg-surface rounded-xl shadow-sm">
+                        <h1 class="text-2xl font-bold text-on-surface mb-6">Add a New Movie</h1>
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-on-surface-secondary mb-1"
+                                    for="title">Título</label>
+                                <input
+                                    class="form-input w-full rounded-lg border-border-color bg-surface text-on-surface placeholder:text-stone-400 focus:ring-primary focus:border-primary"
+                                    id="title" placeholder="e.g., Inception" type="text" />
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-on-surface-secondary mb-1"
+                                        for="year">Año</label>
+                                    <input
+                                        class="form-input w-full rounded-lg border-border-color bg-surface text-on-surface placeholder:text-stone-400 focus:ring-primary focus:border-primary"
+                                        id="year" placeholder="e.g., 2010" type="number" />
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-on-surface-secondary mb-1"
+                                        for="duration">Duración (min)</label>
+                                    <input
+                                        class="form-input w-full rounded-lg border-border-color bg-surface text-on-surface placeholder:text-stone-400 focus:ring-primary focus:border-primary"
+                                        id="duration" placeholder="e.g., 148" type="number" />
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-on-surface-secondary mb-1"
+                                    for="genre">Género</label>
+                                <select
+                                    class="form-select w-full rounded-lg border-border-color bg-surface text-on-surface focus:ring-primary focus:border-primary"
+                                    id="genre">
+                                    <option>Seleccionar género</option>
+                                    <option>Acción</option>
+                                    <option>Comedia</option>
+                                    <option>Drama</option>
+                                    <option>Ciencia Ficción</option>
+                                    <option>Thriller</option>
+                                    <option>Romance</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-on-surface-secondary mb-1"
+                                    for="director">Director</label>
+                                <input
+                                    class="form-input w-full rounded-lg border-border-color bg-surface text-on-surface placeholder:text-stone-400 focus:ring-primary focus:border-primary"
+                                    id="director" placeholder="e.g., Christopher Nolan" type="text" />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-on-surface-secondary mb-1"
+                                    for="cover-url">URL de la Portada</label>
+                                <input
+                                    class="form-input w-full rounded-lg border-border-color bg-surface text-on-surface placeholder:text-stone-400 focus:ring-primary focus:border-primary"
+                                    id="cover-url" placeholder="https://..." type="url" />
+                            </div>
+                            <div class="pt-2">
+                                <button
+                                    class="w-full flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary-focus transition-colors"
+                                    type="submit">
+                                    <span>Añadir Película</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <h2 class="text-2xl font-bold text-on-surface mb-6">Tus Películas</h2>
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-start gap-4 rounded-xl p-4 bg-surface shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <div class="w-24 h-36 flex-shrink-0">
+                                <div class="w-full h-full bg-center bg-no-repeat bg-cover rounded-lg"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuANbQ2S5phQ7d-tUXgQFAZiJPJfBWQHClMx4VePpFYS3COFCnWP1V4kNxnLI8JXFeL17g7181UigebkRjsXcZ1uzlhofHI6q8GDQZKINYE36cgCUWP7HXkG-p60BEwse0dgdvLc17mOQkygDWC-X41EXDTX5ORbP6SshPpZ15bou3bk313xPv-SxVa8DE-yXXBh78b1KBx3NZ-UmjmzSMaTeIjbjns-oxAc4Fkl5dfhFSWGvA7asuscGB6WZwjMS_oY_Gjm10nPZGl8");'>
+                                </div>
+                            </div>
+                            <div class="flex flex-col flex-grow">
+                                <h3 class="text-lg font-bold text-on-surface">The Starry Night</h3>
+                                <p class="text-sm text-on-surface-secondary mt-1">2022 | Drama | Director: Amelia Stone
+                                    | 120 min</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <button
+                                        class="rounded-lg h-8 px-4 bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors">Modificar
+                                        Película</button>
+                                    <button
+                                        class="rounded-lg h-8 px-4 bg-accent/10 text-accent text-sm font-medium hover:bg-accent/20 transition-colors">Eliminar
+                                        Película</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start gap-4 rounded-xl p-4 bg-surface shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <div class="w-24 h-36 flex-shrink-0">
+                                <div class="w-full h-full bg-center bg-no-repeat bg-cover rounded-lg"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvhIGijRhXtGDHMwtKepiwhA_4u_CHcdCHxPpN495v99BijiucFSkcv8ZfYRa2Rf_UwcDgpYKpSn958vw4qeElVbnigIbNYH9-jHFb-WsqwZ4XlGT44K4VojPPJu3nGo3L9xqk2hrPO2BzBzzHLt7f4bU_4nWhFnhXGAPdgZj4KNYUO5t5VlNXO_d1GSThFTe860V6WAVD_4jum-3MRJ_mf9ko1oyje3VT0bT8OytdTYoPfIeLpiRu1jDXD6kQZ8ls9p-9Rb_HXc3T");'>
+                                </div>
+                            </div>
+                            <div class="flex flex-col flex-grow">
+                                <h3 class="text-lg font-bold text-on-surface">Echoes of the Past</h3>
+                                <p class="text-sm text-on-surface-secondary mt-1">2021 | Thriller | Director: Ethan
+                                    Blackwood | 115 min</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <button
+                                        class="rounded-lg h-8 px-4 bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors">Modificar
+                                        Película</button>
+                                    <button
+                                        class="rounded-lg h-8 px-4 bg-accent/10 text-accent text-sm font-medium hover:bg-accent/20 transition-colors">Eliminar
+                                        Película</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start gap-4 rounded-xl p-4 bg-surface shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <div class="w-24 h-36 flex-shrink-0">
+                                <div class="w-full h-full bg-center bg-no-repeat bg-cover rounded-lg"
+                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB2qr-XpAn9pKLqLXh6yGmIHwzBSnDB8rT40ExdKWulVonxsBkfxS24rkj2IrdhyKPeBv3PiKqtikWX12Q7tTScORjZJ83zNpkoAOuhec139lTiBVaPNfA13m89tDYcAnw7dYQKoifPWT5rhXRQbH99R8JYMg9ZFrneHfkPXizrAB0mpcKTXxzm0LYYI-1woypBu7x7VpySSda8MK_lUyXviolkD9TFfreeDgXgddYT3HsqdMoIc5FrD_kNCs-UHAURbGpUBk8x5pMB");'>
+                                </div>
+                            </div>
+                            <div class="flex flex-col flex-grow">
+                                <h3 class="text-lg font-bold text-on-surface">City of Dreams</h3>
+                                <p class="text-sm text-on-surface-secondary mt-1">2023 | Romance | Director: Olivia Reed
+                                    | 105 min</p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <button
+                                        class="rounded-lg h-8 px-4 bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors">Modificar
+                                        Película</button>
+                                    <button
+                                        class="rounded-lg h-8 px-4 bg-accent/10 text-accent text-sm font-medium hover:bg-accent/20 transition-colors">Eliminar
+                                        Película</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-background border-t border-border-color mt-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-on-surface-secondary">
+                <div class="flex justify-center gap-6 mb-4">
+                    <a class="text-sm hover:text-primary transition-colors" href="#">About</a>
+                    <a class="text-sm hover:text-primary transition-colors" href="#">Contact</a>
+                    <a class="text-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                </div>
+                <p class="text-sm">© 2024 CineAdd. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>
