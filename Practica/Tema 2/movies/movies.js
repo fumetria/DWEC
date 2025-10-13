@@ -359,10 +359,13 @@ async function orderBy(type) {
     let nextOrder;
     if (currentOrder === '') {
         nextOrder = 'asc';
+        document.getElementById(`th-icon-${type}`).innerHTML = '<i class="bi bi-sort-alpha-down"></i>';
     } else if (currentOrder === 'asc') {
         nextOrder = 'desc';
+        document.getElementById(`th-icon-${type}`).innerHTML = '<i class="bi bi-sort-alpha-down-alt"></i>';
     } else {
         nextOrder = ''; // resetear orden
+        document.getElementById(`th-icon-${type}`).innerHTML = '';
     }
 
     // Actualizar el atributo del elemento

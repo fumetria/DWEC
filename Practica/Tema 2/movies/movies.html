@@ -192,7 +192,7 @@
                 </div>
                 <div
                     class="flex justify-between items-center shadow rounded-xl px-2 gap-2 border-2 border-transparent transition-all duration-300 w-48 focus-within:w-72 focus-within:border-orange-500">
-                    <button id="search-button" class="border-none text-stone-300 pointer">
+                    <button id="search-button" class="cursor-pointer border-none text-stone-300 pointer">
                         <i class="bi bi-search"></i>
                     </button>
                     <input class="outline-none border-none bg-transparent flex-1" type="text" placeholder="Buscar">
@@ -200,10 +200,10 @@
                 <div id="data-type-switcher" class="flex flex-row justify-center items-center bg-stone-300 rounded mx-2"
                     data-list-type="list">
                     <div class="p-2 rounded" id="card-list-btn" onclick="showDataStyle('card')">
-                        <button class="text-stone-100"><i class="bi bi-microsoft"></i></button>
+                        <button class="cursor-pointer text-stone-100"><i class="bi bi-microsoft"></i></button>
                     </div>
                     <div class="p-2 rounded bg-emerald-500" id="movie-list-btn" onclick="showDataStyle('list')">
-                        <button class="text-stone-100" id=""><i class="bi bi-list-task"></i></button>
+                        <button class="cursor-pointer text-stone-100" id=""><i class="bi bi-list-task"></i></button>
                     </div>
                 </div>
             </section>
@@ -211,14 +211,22 @@
                 <table id="table-mtitle" class="border-collapse table-auto w-full overflow-y-scroll " data-order-by="">
                     <caption class="bg-emerald-700 text-white font-bold">Listado peliculas</caption>
                     <thead class="bg-emerald-500 text-white">
-                        <th class="px-2 py-2">ID</th>
+                        <th class="px-2 py-2"><button class="cursor-pointer" onclick="orderBy('id')">ID<span
+                                    id="th-icon-id"></span></button></th>
                         <th class="px-2 py-2">PORTADA</th>
-                        <th class="px-2 py-2"><button onclick="orderBy('title')">TÍTULO</button></th>
-                        <th class="px-2 py-2">AÑO</th>
-                        <th class="px-2 py-2">GÉNERO</th>
+                        <th class="px-2 py-2"><button class="cursor-pointer" onclick="orderBy('title')">TÍTULO<span
+                                    id="th-icon-title"></span></button>
+                        </th>
+                        <th class="px-2 py-2"><button class="cursor-pointer" onclick="orderBy('year')">AÑO<span
+                                    id="th-icon-year"></span></button></th>
+                        <th class="px-2 py-2"><button class="cursor-pointer" onclick="orderBy('genre')">GÉNERO<span
+                                    id="th-icon-genre"></span></button>
+                        </th>
                         <th class="px-2 py-2">DIRECTOR</th>
-                        <th class="px-2 py-2" onclick="orderBy('rate')">PUNTUACIÓN</th>
-                        <th class="px-2 py-2">FECHA CREACIÓN</th>
+                        <th class="px-2 py-2"><button class="cursor-pointer" onclick="orderBy('rate')">PUNTUACIÓN<span
+                                    id="th-icon-rate"></span></button></th>
+                        <th class="px-2 py-2"><button class="cursor-pointer" onclick="orderBy('createdAt')">FECHA
+                                CREACIÓN<span id="th-icon-createdAt"></span></button></th>
                         <th class="px-2 py-2">ACCIONES</th>
                     </thead>
                     <tbody class="" id="movies-data"></tbody>
