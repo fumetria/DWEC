@@ -16,6 +16,8 @@ const dataCardBtn = document.getElementById('card-list-btn');
 const dataListBtn = document.getElementById('movie-list-btn');
 const listDataSection = document.getElementById('list-data');
 const cardDataSection = document.getElementById('card-data');
+const searchBar = document.getElementById('search-button');
+const query = document.getElementById('query');
 
 function getDate() {
     const date = Date.now();
@@ -217,6 +219,24 @@ async function getMovies() {
     }).catch(err => {
         return { error: "Error al obtener datos" };
     });
+
+    return movies;
+}
+
+async function querySearch(query) {
+    const url = new URL(apiURL);
+    url.searchParams.append('search', query);
+
+    const movies = await fetch(url, {
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+    }).then(res => {
+        if (res.ok) {
+            return res.json();
+        }
+    }).catch(error => {
+        return { error: 'Película no encontrada' }
+    })
 
     return movies;
 }
@@ -431,6 +451,15 @@ mockBtn.addEventListener('click', async () => {
 formUpdateBtn.addEventListener('click', async (event) => {
     event.preventDefault();
     await updateMovie(title.value, year.value, director.value, poster.value, genre.value, rate.value, id.value);
+})
+
+searchBar.addEventListener('click', async () => {
+    const queryInput = query.value;
+    moviesData.innerHTML = "";
+    const MOVIES = await querySearch(queryInput);
+    query.value = '';
+    const dataStyle = dataTypeStyle.dataset.listType;
+    fillData(MOVIES, dataStyle)
 })
 
 
