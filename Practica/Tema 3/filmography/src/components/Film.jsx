@@ -4,7 +4,7 @@ export default function Film({ id, name, year, filmPoster }) {
   return (
     <>
       <div
-        className="flex flex-col border border-blue-400 bg-blue-900 p-2 w-52 h-100 rounded"
+        className="flex flex-col border border-blue-400 bg-blue-900 py-2 px-1 w-52 h-100 rounded"
         key={id}
       >
         <div className="flex justify-end">
@@ -14,7 +14,7 @@ export default function Film({ id, name, year, filmPoster }) {
           <img
             src={filmPoster}
             alt={name}
-            className="w-32 h-65 rounded border border-blue-400 object-cover"
+            className="h-65 rounded border border-blue-400 object-cover"
           />
         </div>
         <div className="my-2">

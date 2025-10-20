@@ -2,6 +2,7 @@ import "./App.css";
 import { peliculas } from "./utils/films.js";
 import FormNewFilm from "./components/FormNewFilm.jsx";
 import GridFilms from "./components/GridFilms.jsx";
+import Header from "./components/Header.jsx";
 
 function App() {
   return (

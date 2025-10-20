@@ -8,7 +8,7 @@ function Input({ label, type, placeHolder }) {
           {label}
         </label>
         <input
-          className="px-3 py-2 rounded border border-gray-400 bg-gray-600"
+          className="px-3 py-2 rounded border border-gray-300 text-gray-300 bg-gray-600 focus:border-green-300 focus:outline-2 outline-green-300"
           type={type ? type : "text"}
           id={label}
           name={label}
