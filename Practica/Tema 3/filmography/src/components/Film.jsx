@@ -17,11 +17,11 @@ export default function Film({ id, name, year, filmPoster }) {
             className="h-65 rounded border border-blue-400 object-cover"
           />
         </div>
-        <div className="my-2">
+        <div className="my-2 mx-2">
           <h3 className="font-bold">{name}</h3>
           <p>{year}</p>
         </div>
-        <div>
+        <div className="flex justify-center">
           <RButton label={"Update"} bgOn={true} />
         </div>
       </div>

@@ -29,7 +29,9 @@ export default function FormNewFilm({ url, method }) {
             <Input label="year" type="number" placeHolder="Year" />
           </div>
           <Input label="film_poster" placeHolder="Film Poster" />
-          <RButton type="submit" label="Crear" bgOn={true} />
+          <div className="flex justify-center items-center">
+            <RButton type="submit" label="Crear" bgOn={true} />
+          </div>
         </form>
       </div>
     </>

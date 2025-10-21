@@ -1,15 +1,21 @@
-import "./App.css";
+// import "./App.css";
 import { peliculas } from "./utils/films.js";
 import FormNewFilm from "./components/FormNewFilm.jsx";
 import GridFilms from "./components/GridFilms.jsx";
+import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
 
 function App() {
   return (
     <>
-      <h1 className="my-4 text-5xl font-semibold">Filmography</h1>
-      <FormNewFilm url={"#"} method={"GET"} />
-      <GridFilms moviesList={peliculas} />
+      <Header />
+      <main>
+        <section className="max-w-5xl mx-auto">
+          <FormNewFilm url={"#"} method={"GET"} />
+          <GridFilms moviesList={peliculas} />
+        </section>
+      </main>
+      <Footer />
     </>
   );
 }
