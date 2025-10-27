@@ -1,6 +1,6 @@
 import RButton from "./RButton.jsx";
 
-export default function Film({ id, name, year, filmPoster }) {
+export default function Film({ id, name, year, filmPoster, onClick }) {
   return (
     <>
       <div
@@ -8,7 +8,7 @@ export default function Film({ id, name, year, filmPoster }) {
         key={id}
       >
         <div className="flex justify-end">
-          <RButton label={"X"} bgOn={false} />
+          <RButton label={"X"} bgOn={false} onClick={onClick} />
         </div>
         <div className="flex items-center justify-center">
           <img
