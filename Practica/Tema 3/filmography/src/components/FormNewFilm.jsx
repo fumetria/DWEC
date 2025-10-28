@@ -2,7 +2,7 @@ import RButton from "./RButton.jsx";
 import { useState } from "react";
 import FormInput from "./FormInput.jsx";
 
-export default function FormNewFilm({ url, method }) {
+export default function FormNewFilm({ url, method, onAddNewFilm }) {
   const [formData, setFormData] = useState({
     name: "",
     year: "",
@@ -27,7 +27,7 @@ export default function FormNewFilm({ url, method }) {
         body: JSON.stringify(formData),
       });
       if (res.ok) {
-        console.log("Film creado correctamente");
+        onAddNewFilm(formData);
         setFormData({ name: "", year: "", film_poster: "" });
       }
     } catch {

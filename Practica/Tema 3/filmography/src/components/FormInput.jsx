@@ -1,4 +1,10 @@
-export default function Input({ label, type, placeHolder, value, onChange }) {
+export default function FormInput({
+  label,
+  type,
+  placeHolder,
+  value,
+  onChange,
+}) {
   return (
     <>
       <div className="p-3 my-2 w-full flex flex-col justify-start">

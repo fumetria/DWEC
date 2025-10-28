@@ -6,10 +6,10 @@ export default function Header() {
           <div className="flex gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
               aria-hidden="true"
               role="img"
-              class="iconify iconify--logos"
+              className="iconify iconify--logos"
               width="35.93"
               height="32"
               preserveAspectRatio="xMidYMid meet"
