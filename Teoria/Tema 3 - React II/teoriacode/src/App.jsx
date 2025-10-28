@@ -9,6 +9,7 @@ import ConditionalRendering from "./ConditionalRendering";
 const App = () => {
   const handleChange = (event) => {
     console.log("Event Type: ", event.type);
+    console.log("Event ID: ", event.target.id);
     console.log("Event Targe Value: ", event.target.value);
   };
   return (
@@ -18,6 +19,7 @@ const App = () => {
           type="text"
           onChange={handleChange}
           placeholder="Type something..."
+          id="name"
         />
       </div>
       <ClickButton />
