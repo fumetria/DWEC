@@ -22,3 +22,11 @@ Para arrancar el proyecto:
 npm install
 npm run dev
 ```
+
+## Filmography 2
+
+Ahora vamos a mejorar la aplicación anterior añadiendo las siguientes funcionalidades:
+
+1. Al hacer click en el botón "Crear" del formulario, enviara los datos del formulario a nuestra API en Mockapi y añadirá a la lista de películas del grid.
+2. Al hacer click en el botón "Borrar" película, este será borrado de la API y actualizará el listado de películas.
+3. Al hacer click en el botón "Actualizar" película en la ficha de una película, este actualizará los datos del formulario para que podamos modificarlos y al pusar el botón "Actualizar" del formulario, actualizará los datos en la API y actualizará el listado de películas.
