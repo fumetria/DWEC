@@ -1,6 +1,28 @@
+// import { useState } from "react";
 import Film from "./Film.jsx";
 
-export default function GridFilms({ moviesList }) {
+export default function GridFilms({
+  moviesList,
+  handleDeleteClick,
+  handleUpdateFilmForm,
+}) {
+  // const [movieSelected, setMovieSelected] = useState({
+  //   id: "",
+  //   name: "",
+  //   year: "",
+  //   filmPoster: "",
+  // });
+
+  // const handleClick = (movie) => {
+  //   setMovieSelected((prevState) => ({
+  //     ...prevState,
+  //     id: movie.id,
+  //     name: movie.name,
+  //     year: movie.year,
+  //     filmPoster: movie.film_poster,
+  //   }));
+  // };
+
   return (
     <>
       <div
@@ -10,10 +32,13 @@ export default function GridFilms({ moviesList }) {
         {moviesList.map((movie) => {
           return (
             <Film
+              key={movie.id}
               id={movie.id}
               name={movie.name}
               year={movie.year}
-              filmPoster={movie.image}
+              filmPoster={movie.film_poster}
+              handleDeleteClick={() => handleDeleteClick(movie.id)}
+              handleUpdateFilmForm={() => handleUpdateFilmForm(movie.id)}
             />
           );
         })}

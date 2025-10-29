@@ -6,6 +6,7 @@ export default function Film({
   year,
   filmPoster,
   handleDeleteClick,
+  handleUpdateFilmForm,
 }) {
   return (
     <>
@@ -14,7 +15,12 @@ export default function Film({
         key={id}
       >
         <div className="flex justify-end">
-          <RButton label={"X"} bgOn={false} onClick={handleDeleteClick} />
+          <RButton
+            label={"X"}
+            bgOn={false}
+            onClick={handleDeleteClick}
+            btnTittle={"Eliminar película"}
+          />
         </div>
         <div className="flex items-center justify-center">
           <img
@@ -28,7 +34,11 @@ export default function Film({
           <p>{year}</p>
         </div>
         <div className="flex justify-center">
-          <RButton label={"Update"} bgOn={true} />
+          <RButton
+            label={"Actualizar"}
+            bgOn={true}
+            onClick={handleUpdateFilmForm}
+          />
         </div>
       </div>
     </>
