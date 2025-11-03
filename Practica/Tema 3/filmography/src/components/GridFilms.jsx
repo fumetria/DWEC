@@ -6,23 +6,6 @@ export default function GridFilms({
   handleDeleteClick,
   handleUpdateFilmForm,
 }) {
-  // const [movieSelected, setMovieSelected] = useState({
-  //   id: "",
-  //   name: "",
-  //   year: "",
-  //   filmPoster: "",
-  // });
-
-  // const handleClick = (movie) => {
-  //   setMovieSelected((prevState) => ({
-  //     ...prevState,
-  //     id: movie.id,
-  //     name: movie.name,
-  //     year: movie.year,
-  //     filmPoster: movie.film_poster,
-  //   }));
-  // };
-
   return (
     <>
       <div
@@ -37,6 +20,7 @@ export default function GridFilms({
               name={movie.name}
               year={movie.year}
               filmPoster={movie.film_poster}
+              genres={movie.genres}
               handleDeleteClick={() => handleDeleteClick(movie.id)}
               handleUpdateFilmForm={() => handleUpdateFilmForm(movie.id)}
             />

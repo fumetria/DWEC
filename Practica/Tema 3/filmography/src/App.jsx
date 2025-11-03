@@ -15,6 +15,7 @@ function App() {
     name: "",
     year: "",
     film_poster: "",
+    genres: "",
   });
 
   useEffect(() => {
@@ -71,7 +72,13 @@ function App() {
     });
 
     if (res.ok) {
-      setMovieSelected({ id: "", name: "", year: "", film_poster: "" });
+      setMovieSelected({
+        id: "",
+        name: "",
+        year: "",
+        film_poster: "",
+        genres: "",
+      });
       setReloadFilmList((prev) => !prev);
     }
   };
