@@ -1,5 +1,5 @@
 import HeaderLogo from "./HeaderLogo";
-import NavLink from "./Navlink";
+import NavLink from "./NavLink";
 
 export default function Header() {
   return (
