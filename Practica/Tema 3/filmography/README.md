@@ -30,3 +30,13 @@ Ahora vamos a mejorar la aplicación anterior añadiendo las siguientes funciona
 1. Al hacer click en el botón "Crear" del formulario, enviara los datos del formulario a nuestra API en Mockapi y añadirá a la lista de películas del grid.
 2. Al hacer click en el botón "Borrar" película, este será borrado de la API y actualizará el listado de películas.
 3. Al hacer click en el botón "Actualizar" película en la ficha de una película, este actualizará los datos del formulario para que podamos modificarlos y al pusar el botón "Actualizar" del formulario, actualizará los datos en la API y actualizará el listado de películas.
+
+## Filmography 3
+
+Ahora vamos a añadir una nueva funcionalidad: Creación y asignación de géneros de películas.
+
+![Filmography 3](./docs/readme-img/Filmography3.png)
+
+1. Crear, listar y eliminar géneros en el formulario de creación de películas.
+2. Al crear una película, podemos asignar o eliminar los géneros tiene al hacer click sobre ellos.
+3. Al editar una película, vemos los géneros que tiene y podemos modificarlos haciendo click sobre ellos.
