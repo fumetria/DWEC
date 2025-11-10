@@ -40,3 +40,7 @@ Ahora vamos a añadir una nueva funcionalidad: Creación y asignación de géner
 1. Crear, listar y eliminar géneros en el formulario de creación de películas.
 2. Al crear una película, podemos asignar o eliminar los géneros tiene al hacer click sobre ellos.
 3. Al editar una película, vemos los géneros que tiene y podemos modificarlos haciendo click sobre ellos.
+
+## Filmography 4
+
+Vamos a mejorar nuestra aplicación utilizando el método useContext de React para compartir los estados globales de la aplicación y creando un custom hook para hacer los fetch a las tablas películas y géneros.
