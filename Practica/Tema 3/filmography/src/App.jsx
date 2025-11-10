@@ -4,12 +4,12 @@ import FormNewFilm from "./components/FormNewFilm.jsx";
 import GridFilms from "./components/GridFilms.jsx";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useContext } from "react";
+import { FilmContext } from "./components/FilmContext.jsx";
 
 function App() {
   const URL = "https://68dc4aaa7cd1948060a9ef39.mockapi.io/api/v1/fuApi/films";
-  const [filmList, setFilmList] = useState([]);
-  const [reloadFilmList, setReloadFilmList] = useState(false);
   const [movieSelected, setMovieSelected] = useState({
     id: "",
     name: "",
@@ -17,22 +17,9 @@ function App() {
     film_poster: "",
     genres: "",
   });
-
-  useEffect(() => {
-    const fetchFilms = async () => {
-      try {
-        const res = await fetch(URL);
-        if (!res.ok) throw new Error("Error al obtener datos");
-        const data = await res.json();
-        setFilmList(data);
-      } catch (err) {
-        console.error(err);
-        setFilmList([]);
-      }
-    };
-
-    fetchFilms();
-  }, [reloadFilmList]);
+  const { filmList, setFilmList, reloadFilmList, setReloadFilmList } =
+    useContext(FilmContext);
+  console.log(filmList);
 
   const handleAddNewFilm = () => {
     setReloadFilmList((prevStatus) => !prevStatus);
