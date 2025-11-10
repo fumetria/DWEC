@@ -1,20 +1,17 @@
 import RButton from "./RButton.jsx";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import FormInput from "./FormInput.jsx";
+import { FilmContext } from "./FilmContext.jsx";
 
-export default function FormNewFilm({
-  url,
-  onAddNewFilm,
-  onUpdateFilm,
-  filmSelected,
-}) {
+export default function FormNewFilm() {
   const [formData, setFormData] = useState({
     name: "",
     year: "",
     film_poster: "",
     genres: "",
   });
-
+  const { handleAddNewFilm, handleUpdateFilm, URL, filmSelected } =
+    useContext(FilmContext);
   const [genresList, setGenresList] = useState([]);
   const [nGenre, setNGenre] = useState("");
 
@@ -23,11 +20,13 @@ export default function FormNewFilm({
     //Amb aquest condicional, ens asegurem que no aparega cap genre buit
     //if (filmSelected.genres != "" || filmSelected.genres != null)
     //Amb la expressió anterior ens generava un genre buit...
-    if (filmSelected.genres != "" && filmSelected.genres != null) {
-      gList = filmSelected.genres.split(",").map((genre) => genre.trim());
+    if (filmSelected) {
+      if (filmSelected.genres != "" && filmSelected.genres != null) {
+        gList = filmSelected.genres.split(",").map((genre) => genre.trim());
+      }
+      setFormData(filmSelected);
+      setGenresList(gList);
     }
-    setFormData(filmSelected);
-    setGenresList(gList);
   }, [filmSelected]);
 
   const handleChange = (event) => {
@@ -49,14 +48,14 @@ export default function FormNewFilm({
     const genrelist = genresList.join(",");
     const dataSubmit = { ...formData, genres: genrelist };
     if (formData.id) {
-      await onUpdateFilm(dataSubmit);
+      await handleUpdateFilm(dataSubmit);
     } else {
-      await fetch(url, {
+      await fetch(URL, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(dataSubmit),
       });
-      onAddNewFilm();
+      handleAddNewFilm();
     }
     setFormData({ name: "", year: "", film_poster: "", genres: "" });
     setGenresList([]);
