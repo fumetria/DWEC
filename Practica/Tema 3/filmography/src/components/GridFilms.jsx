@@ -9,7 +9,7 @@ export default function GridFilms({ moviesList }) {
         className="flex flex-wrap justify-center gap-4 my-5"
       >
         {moviesList.map((movie) => {
-          return <Film film={movie} />;
+          return <Film key={movie.id} film={movie} />;
         })}
       </div>
     </>

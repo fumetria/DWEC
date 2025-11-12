@@ -2,6 +2,7 @@ import RButton from "./RButton.jsx";
 import { useEffect, useState, useContext } from "react";
 import FormInput from "./FormInput.jsx";
 import { FilmContext } from "./context/FilmContext.jsx";
+import { GenreContext } from "./context/GenreContext.jsx";
 
 export default function FormNewFilm() {
   const [formData, setFormData] = useState({
@@ -12,8 +13,15 @@ export default function FormNewFilm() {
   });
   const { handleAddNewFilm, handleUpdateFilm, URL, filmSelected } =
     useContext(FilmContext);
-  const [genresList, setGenresList] = useState([]);
-  const [nGenre, setNGenre] = useState("");
+
+  const {
+    genresList,
+    setGenresList,
+    nGenre,
+    setNGenre,
+    handleCreateGenre,
+    handleDeleteGenre,
+  } = useContext(GenreContext);
 
   useEffect(() => {
     let gList = [];
@@ -27,7 +35,7 @@ export default function FormNewFilm() {
       setFormData(filmSelected);
       setGenresList(gList);
     }
-  }, [filmSelected]);
+  }, [filmSelected, setGenresList]);
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -61,16 +69,6 @@ export default function FormNewFilm() {
     setGenresList([]);
   };
 
-  const handleCreateGenre = () => {
-    if (!nGenre || genresList.some((genre) => genre === nGenre)) return;
-    setGenresList((prevState) => [...prevState, nGenre]);
-    setNGenre("");
-  };
-
-  const handleDeleteGenre = (genre) => {
-    const updateGenreList = genresList.filter((gen) => gen != genre);
-    setGenresList(updateGenreList);
-  };
   return (
     <>
       <div className="bg-gray-800 rounded p-3 my-2 border border-gray-400">
