@@ -3,7 +3,7 @@ import GridFilms from "./components/GridFilms.jsx";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
 import { useContext } from "react";
-import { FilmContext } from "./components/FilmContext.jsx";
+import { FilmContext } from "./components/context/FilmContext.jsx";
 
 function App() {
   const { filmList, filmSelected } = useContext(FilmContext);

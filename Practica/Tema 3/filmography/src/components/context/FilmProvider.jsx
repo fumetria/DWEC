@@ -1,6 +1,5 @@
-import { createContext, useState, useEffect } from "react";
-
-export const FilmContext = createContext();
+import { useState, useEffect } from "react";
+import { FilmContext } from "./FilmContext";
 
 export function FilmProvider({ children }) {
   const [filmList, setFilmList] = useState([]);

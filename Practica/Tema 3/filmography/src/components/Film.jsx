@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import RButton from "./RButton.jsx";
-import { FilmContext } from "./FilmContext.jsx";
+import { FilmContext } from "./context/FilmContext.jsx";
 
 export default function Film({ film }) {
   const [genresList, setGenresList] = useState([]);

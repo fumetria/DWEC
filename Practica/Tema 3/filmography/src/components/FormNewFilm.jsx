@@ -1,7 +1,7 @@
 import RButton from "./RButton.jsx";
 import { useEffect, useState, useContext } from "react";
 import FormInput from "./FormInput.jsx";
-import { FilmContext } from "./FilmContext.jsx";
+import { FilmContext } from "./context/FilmContext.jsx";
 
 export default function FormNewFilm() {
   const [formData, setFormData] = useState({
