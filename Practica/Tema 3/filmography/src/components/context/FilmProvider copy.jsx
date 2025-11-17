@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { FilmContext } from "./FilmContext";
-import { useFetchFilms } from "../../hooks/useFetchFilms";
 
 export function FilmProvider({ children }) {
   const [filmList, setFilmList] = useState([]);
@@ -12,13 +11,22 @@ export function FilmProvider({ children }) {
     film_poster: "",
     genres: "",
   });
-  const [query, setQuery] = useState("");
   const URL = "https://68dc4aaa7cd1948060a9ef39.mockapi.io/api/v1/fuApi/films";
-  const { data } = useFetchFilms(URL, query, reloadFilmList);
-
   useEffect(() => {
-    setFilmList(data);
-  }, [data]);
+    const fetchFilms = async () => {
+      try {
+        const res = await fetch(URL);
+        if (!res.ok) throw new Error("Error al obtener datos");
+        const data = await res.json();
+        setFilmList(data);
+      } catch (err) {
+        console.error(err);
+        setFilmList([]);
+      }
+    };
+
+    fetchFilms();
+  }, [reloadFilmList]);
 
   const handleAddNewFilm = () => {
     setReloadFilmList((prevStatus) => !prevStatus);
@@ -47,7 +55,9 @@ export function FilmProvider({ children }) {
         return res.json();
       }
     });
+    console.log(selectedFilm);
     setFilmSelected(selectedFilm);
+    console.log();
   };
 
   const handleUpdateFilm = async (filmData) => {
